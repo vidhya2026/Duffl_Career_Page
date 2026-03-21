@@ -1,0 +1,715 @@
+﻿@model Duffl_career.Models.Career_Detail
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career-Details - Duffl Digital</title>
+    <meta name="title" content="Career-Details - Duffl Digital">
+    <meta property="og:image" content="https://dufflpreview.in/duffl-digital/assets/img/duffl-digital.jpg">
+    <link rel="shortcut icon" href="~/assets/img/fav-icon.png">
+        <link rel="stylesheet" type="text/css" href="~/assets/css/jquery.fancybox.min.css">
+            <link href="~/assets/css/bootstrap5-3-2.min.css" rel="stylesheet">
+                <link href="~/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+                    <link href="~/assets/css/popup.css" rel="stylesheet">
+                        <link href="~/assets/css/sticky.css" rel="stylesheet">
+                            <link href="~/assets/css/aos.css" rel="stylesheet">
+                                <link rel="stylesheet" href="~/assets/css/Careers-Details.css">
+                                    <link rel="stylesheet" href="~/assets/css/header-two.css">
+                                        <link rel="stylesheet" href="~/assets/css/new-header.css">
+                                            <link rel="stylesheet" href="~/assets/css/footer.css">
+                                            </head>
+                                            <body>
+
+                                                <!-- header -->
+                                                <div class="new-header">
+                                                    <div class="flex-box box-left"></div>
+                                                    <div class="flex-box"></div>
+                                                    <div class="flex-box box-right">
+                                                        <div class="menu">
+                                                            <ul class="menu__list">
+                                                                <li class="menu__item"><a href="/">Home</a></li>
+                                                                <li class="menu__item"><a href="/case-studies">Case Studies</a></li>
+                                                                <li class="menu__item"><a href="/blog">Blog</a></li>
+                                                                <li class="menu__item"><a href="/careers">Careers</a></li>
+                                                                <li class="menu__item"><a href="/contact">Contact</a></li>
+                                                                <li class="menu__item"><a href="/service">Services</a></li>
+                                                                <li class="menu__item"><a href="/portfolio">Our Works</a></li>
+                                                                <li class="menu__item"><a href="/team">Team</a></li>
+                                                                <li class="menu__item"><a href="/testimonial">Testimonial</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <header>
+                                                    <div class="container">
+                                                        <div class="site-logo">
+                                                            <a href="/">
+                                                                <img alt="Duffl Digital" src="~/assets/img/site-logo.png" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                            <div class="toggle">
+                                                                <span class="toggle__span"></span>
+                                                                <span class="toggle__span"></span>
+                                                                <span class="toggle__span"></span>
+                                                            </div>
+                                                        </div>
+                                                    </header>
+                                                    <!-- header -->
+                                                    <!-- sticky -->
+                                                    <div class="sticky-set">
+                                                        <div class="sticky-icon">
+                                                            <a href="https://wa.me/916379150368">
+                                                                <img alt="WhatsApp" src="~/assets/img/sticky-icon/whatsapp.svg" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- sticky -->
+                                                        <!-- banner -->
+                                                        <div class="banner-section">
+                                                            <div class="container">
+                                                                <h1>Work &#64; duffl</h1>
+                                                                <h6>Graphic Design</h6>
+                                                            </div>
+                                                        </div>
+                                                        <!-- banner -->
+                                                        <!-- main content -->
+                                                        <div class="black-section">
+                                                            <div class="container">
+
+                                                                <!-- set one -->
+                                                                <div class="set-one">
+                                                                    <p>
+                                                                        At DUFFL, we value innovation, collaboration, and growth. Discover exciting
+                                                                        opportunities across various domains and be part of a culture that fosters
+                                                                        creativity and excellence. Explore your potential and build a rewarding
+                                                                        career with us. Apply now!
+                                                                    </p>
+                                                                    <h1>YOUR PROFICIENCY IN</h1>
+                                                                    <div class="row m-0 check-box" style="row-gap:22px; padding:0 75px;">
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="Career-Details-box">
+                                                                                <input type="checkbox" id="skill1">
+                                                                                <label for="skill1">Print Collaterals</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="Career-Details-box">
+                                                                                <input type="checkbox" id="skill2">
+                                                                                <label for="skill2">Brand Identity Designs</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="Career-Details-box">
+                                                                                <input type="checkbox" id="skill3">
+                                                                                <label for="skill3">Adobe Software Suite</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="Career-Details-box">
+                                                                                <input type="checkbox" id="skill4">
+                                                                                <label for="skill4">Social Media Graphics</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="Career-Details-box">
+                                                                                <input type="checkbox" id="skill5">
+                                                                                <label for="skill5">Video Editing</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="Career-Details-box">
+                                                                                <input type="checkbox" id="skill6">
+                                                                                <label for="skill6">Motion Graphics</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- set one end -->
+                                                                <!-- set two -->
+                                                                <div class="set-two">
+                                                                    <div class="pentool">
+                                                                        <img alt="Pen Tool" src="~/assets/img/career-details/Pentool.png"
+                                                                             class="img-fluid">
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <!-- Job Description — NOT CHANGED -->
+                                                                            <div class="col-lg-6">
+                                                                                <div class="form-left">
+                                                                                    <h1>Job Description</h1>
+                                                                                    <p>
+                                                                                        Lorem ipsum dolor sit amet consectetur. Parturient elementum
+                                                                                        justo pharetra orci nisl laoreet tortor urna. Nibh ultrices
+                                                                                        vel lorem etiam interdum sed eget. Nisl a eget eget sed. Duis
+                                                                                        amet fames semper interdum. Diam faucibus ac in nulla diam
+                                                                                        volutpat pretium. Amet et at donec urna eu dictum dignissim
+                                                                                        ac et. Tellus blandit orci vitae arcu lacus enim vulputate
+                                                                                        posuere augue. Sit tortor pellentesque vitae porta dolor nunc.
+                                                                                        Id arcu posuere mattis turpis purus malesuada.
+                                                                                    </p>
+                                                                                    <div class="Center-ul">
+                                                                                        <ul>
+                                                                                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                                                                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                                                                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                                                                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                                                                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Application Form -->
+                                                                            <div class="col-lg-6">
+                                                                                <div class="form-right position-relative">
+
+                                                                                    @if (TempData["Success"] != null)
+                                                                                    {
+                                                                                        <div class="alert alert-success mb-3">
+                                                                                            @TempData["Success"]
+                                                                                        </div>
+                                                                                    }
+
+                                                                                    <form method="post" asp-controller="CareerDetails"
+                                                                                          asp-action="Apply" enctype="multipart/form-data">
+                                                                                        @Html.AntiForgeryToken()
+                                                                                        @Html.ValidationSummary(false, "",
+                                                                                            new { @class = "text-danger" })
+
+                                                                                        <!-- Name — NOT CHANGED -->
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label" for="Name">Name*</label>
+                                                                                            <input asp-for="Name" id="Name"
+                                                                                                   class="form-input" type="text" />
+                                                                                            <span asp-validation-for="Name"
+                                                                                                  class="text-danger"></span>
+                                                                                        </div>
+
+                                                                                        <!-- Email — NOT CHANGED -->
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label" for="Email">Email Id*</label>
+                                                                                            <input asp-for="Email" id="Email"
+                                                                                                   class="form-input" type="email" />
+                                                                                            <span asp-validation-for="Email"
+                                                                                                  class="text-danger"></span>
+                                                                                        </div>
+
+                                                                                        <!-- Mobile — NOT CHANGED -->
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label" for="MobileNumber">
+                                                                                                Mobile Number*
+                                                                                            </label>
+                                                                                            <input asp-for="MobileNumber" id="MobileNumber"
+                                                                                                   class="form-input" type="tel"
+                                                                                                   maxlength="10"
+                                                                                                   oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+                                                                                            <span asp-validation-for="MobileNumber"
+                                                                                                  class="text-danger"></span>
+                                                                                        </div>
+
+                                                                                        <!-- Location — NOT CHANGED -->
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label" for="Location">Location*</label>
+                                                                                            <input asp-for="Location" id="Location"
+                                                                                                   class="form-input" type="text" />
+                                                                                            <span asp-validation-for="Location"
+                                                                                                  class="text-danger"></span>
+                                                                                        </div>
+
+                                                                                        <!-- Fresher / Experienced — NOT CHANGED -->
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label label-design mb-4"
+                                                                                                   for="ExperienceLevel">Are you a*</label>
+                                                                                            <select asp-for="ExperienceLevel"
+                                                                                                    id="ddlExperience"
+                                                                                                    class="custom-select sources mt-4 w-100 pt-4"
+                                                                                                    asp-items='@(new SelectList(new[] {
+                                                                                            new { Value = "",            Text = "Choose One"   },
+                                                                                            new { Value = "Fresher",     Text = "Fresher"      },
+                                                                                            new { Value = "Experienced", Text = "Experienced"  }
+                                                                                        }, "Value", "Text"))'>
+                                                                                            </select>
+                                                                                            <span asp-validation-for="ExperienceLevel"
+                                                                                                  class="text-danger"></span>
+                                                                                        </div>
+
+                                                                                        <!-- Expected Salary — NOT CHANGED -->
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label" for="ExpectedSalary">
+                                                                                                Expected Salary
+                                                                                            </label>
+                                                                                            <input asp-for="ExpectedSalary" id="ExpectedSalary"
+                                                                                                   class="form-input" type="number" min="0"
+                                                                                                   oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+                                                                                            <span asp-validation-for="ExpectedSalary"
+                                                                                                  class="text-danger"></span>
+                                                                                        </div>
+
+                                                                                        <!-- ===== NEW FIELDS — EXPERIENCED ONLY ===== -->
+                                                                                        <div id="experiencedFields" style="display:none;">
+
+                                                                                            <!-- Currently Employed -->
+                                                                                            <div class="form-group input-margin">
+                                                                                                <label class="form-label label-design mb-4">
+                                                                                                    Currently Employed*
+                                                                                                </label>
+                                                                                                <select asp-for="CurrentlyEmployed"
+                                                                                                        id="ddlCurrentEmployed"
+                                                                                                        class="custom-select sources mt-4 w-100 pt-4">
+                                                                                                    <option value="">Choose One</option>
+                                                                                                    <option value="Y">Yes</option>
+                                                                                                    <option value="N">No</option>
+                                                                                                </select>
+                                                                                                <span asp-validation-for="CurrentlyEmployed"
+                                                                                                      class="text-danger"></span>
+                                                                                            </div>
+
+                                                                                            <!-- Work Experience — decimal only -->
+                                                                                            <div class="form-group input-margin">
+                                                                                                <label class="form-label">
+                                                                                                    Work Experience (Years)*
+                                                                                                </label>
+                                                                                                <input asp-for="WorkExperience"
+                                                                                                       class="form-input"
+                                                                                                       type="number"
+                                                                                                       step="0.5"
+                                                                                                       min="0"
+                                                                                                       max="50"
+                                                                                                     
+                                                                                                       oninput="this.value=this.value.replace(/[^0-9.]/g,'')" />
+                                                                                                <span asp-validation-for="WorkExperience"
+                                                                                                      class="text-danger"></span>
+                                                                                            </div>
+
+                                                                                            <!-- Currently Employed = YES fields -->
+                                                                                            <div id="employedYesFields" style="display:none;">
+
+                                                                                                <div class="form-group input-margin">
+                                                                                                    <label class="form-label">
+                                                                                                        Current Employer Name*
+                                                                                                    </label>
+                                                                                                    <input asp-for="CurrentEmployerName"
+                                                                                                           class="form-input" type="text"
+                                                                                                           />
+                                                                                                    <span asp-validation-for="CurrentEmployerName"
+                                                                                                          class="text-danger"></span>
+                                                                                                </div>
+
+                                                                                                <div class="form-group input-margin">
+                                                                                                    <label class="form-label">
+                                                                                                        Current Drawn Salary*
+                                                                                                    </label>
+                                                                                                    <input asp-for="CurrentDrawnSalary"
+                                                                                                           class="form-input" type="number" min="0"
+                                                                                                          
+                                                                                                           oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+                                                                                                    <span asp-validation-for="CurrentDrawnSalary"
+                                                                                                          class="text-danger"></span>
+                                                                                                </div>
+
+                                                                                                <div class="form-group input-margin">
+                                                                                                    <label class="form-label">Notice Period*</label>
+                                                                                                    <input asp-for="NoticePeriod"
+                                                                                                           class="form-input" type="text"
+                                                                                                          />
+                                                                                                    <span asp-validation-for="NoticePeriod"
+                                                                                                          class="text-danger"></span>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <!-- YES fields end -->
+                                                                                            <!-- Currently Employed = NO fields -->
+                                                                                            <div id="employedNoFields" style="display:none;">
+
+                                                                                                <div class="form-group input-margin">
+                                                                                                    <label class="form-label">
+                                                                                                        Last Employer Name*
+                                                                                                    </label>
+                                                                                                    <input asp-for="LastEmployerName"
+                                                                                                           class="form-input" type="text"
+                                                                                                           placeholder="Enter last employer name" />
+                                                                                                    <span asp-validation-for="LastEmployerName"
+                                                                                                          class="text-danger"></span>
+                                                                                                </div>
+
+                                                                                                <div class="form-group input-margin">
+                                                                                                    <label class="form-label">
+                                                                                                        Last Drawn Salary*
+                                                                                                    </label>
+                                                                                                    <input asp-for="LastDrawnSalary"
+                                                                                                           class="form-input" type="number" min="0"
+                                                                                                           placeholder="Enter last drawn salary"
+                                                                                                           oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+                                                                                                    <span asp-validation-for="LastDrawnSalary"
+                                                                                                          class="text-danger"></span>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <!-- NO fields end -->
+
+                                                                                        </div>
+                                                                                        <!-- FILE UPLOAD -->
+                                                                                        <div class="file-upload-wrapper input-margin"
+                                                                                             >
+
+                                                                                     
+                                                                                            <input type="file"
+                                                                                                   name="CvFile"
+                                                                                                   id="flPaper"
+                                                                                                   class="file-upload-field"
+                                                                                                   accept=".doc,.docx,.pdf">
+                                                                                          
+                                                                                            <span id="fileNameDisplay"
+                                                                                                  style="color:#aaa; font-size:13px;
+                                                                                                display:block; margin-top:8px;">
+                                                                                                No file chosen
+                                                                                            </span>
+
+                                                                                            <span class="notelabel"
+                                                                                                  style="position:static; margin-top:8px; display:block;">
+                                                                                                (.doc, .docx, .pdf) file size not to exceed 5 MB
+                                                                                            </span>
+
+                                                                                            @if (ViewData.ModelState["CvFile"]?.Errors.Count > 0)
+                                                                                            {
+                                                                                                <span class="text-danger">
+                                                                                                    @ViewData.ModelState["CvFile"]!.Errors[0].ErrorMessage
+                                                                                                </span>
+                                                                                            }
+                                                                                        </div>
+
+                                                                                        <!-- Captcha — NOT CHANGED -->
+                                                                                        <h3>Verify Captcha</h3>
+                                                                                        <div class="d-flex" style="gap:10px;">
+                                                                                            <h4>2 + 3 =</h4>
+                                                                                            <input id="CaptchaAnswer" name="CaptchaAnswer"
+                                                                                                   class="last-input" type="number" />
+                                                                                        </div>
+                                                                                        @if (TempData["CaptchaError"] != null)
+                                                                                        {
+                                                                                            <span class="text-danger">@TempData["CaptchaError"]</span>
+                                                                                        }
+
+                                                                                        <button type="submit">Submit</button>
+
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Application Form end -->
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- set two end -->
+                                                                    <!-- set three — NOT CHANGED -->
+                                                                    <div class="set-three">
+                                                                        <div class="row justify-content-between">
+                                                                            <div class="col-lg-4 col-md-12">
+                                                                                <div class="set-one-content">
+                                                                                    <h1>Other Opportunities</h1>
+                                                                                    <p>
+                                                                                        Discover a range of exciting roles at Duffl Digital that
+                                                                                        align with your skills and passions.
+                                                                                    </p>
+                                                                                    <h5 class="m-0">
+                                                                                        <a href="/careers">
+                                                                                            <h6>
+                                                                                                Learn More
+                                                                                                <span>
+                                                                                                    <img alt="" src="~/assets/img/case-studies/arrow.svg"
+                                                                                                         class="ms-2">
+                                                                                                    </span>
+                                                                                                </h6>
+                                                                                            </a>
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-4 p-0 shot-line">
+                                                                                    <div class="set-two-content">
+                                                                                        <h1>Digital Marketing <br><span>Strategist</span></h1>
+                                                                                        <p>View &amp; Apply</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-4 shot-line-two" style="padding:0 39px;">
+                                                                                    <div class="set-two-content">
+                                                                                        <h1>Content <br><span>Writer</span></h1>
+                                                                                        <p>View &amp; Apply</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-2 col-md-4 p-0">
+                                                                                    <div class="set-two-content set-two-content-right">
+                                                                                        <h1>Client Services <br><span>Manager</span></h1>
+                                                                                        <p>View &amp; Apply</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- set three end -->
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- main content end -->
+                                                                <!-- footer — NOT CHANGED -->
+                                                                <footer data-aos="fade-up">
+                                                                    <div class="container">
+                                                                        <h1 class="text-center position-relative">
+                                                                            <a href="/">
+                                                                                <img alt="Duffl Digital" src="~/assets/img/footer/Group.svg">
+                                                                                </a>
+                                                                            </h1>
+                                                                            <div class="menu-set-footer">
+                                                                                <div class="row align-items-center">
+                                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                                                                                        <div class="four-menu four-menu-line">
+                                                                                            <a href="/service"><h6>Services</h6></a>
+                                                                                            <a href="/case-studies"><h6>Case studies</h6></a>
+                                                                                            <a href="/portfolio"><h6>Portfolio</h6></a>
+                                                                                            <a href="/careers"><h6>Careers</h6></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-2">
+                                                                                        <div class="icon">
+                                                                                            <a href="https://www.instagram.com/duffldigital"
+                                                                                                   target="_blank" rel="noopener">
+                                                                                                <img alt="Instagram" src="~/assets/img/footer/insta.svg">
+                                                                                                </a>
+                                                                                                <a href="https://www.linkedin.com/company/duffldigital/"
+                                                                                                       target="_blank" rel="noopener">
+                                                                                                    <img alt="LinkedIn" src="~/assets/img/footer/indeed.svg">
+                                                                                                    </a>
+                                                                                                    <a href="https://www.facebook.com/duffldigital"
+                                                                                                           target="_blank" rel="noopener">
+                                                                                                        <img alt="Facebook" src="~/assets/img/footer/fb.svg">
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                                                                                                    <div class="four-menu">
+                                                                                                        <a href="/testimonial"><h6>Testimonial</h6></a>
+                                                                                                        <a href="/team"><h6>Team</h6></a>
+                                                                                                        <a href="/blog"><h6>Blog</h6></a>
+                                                                                                        <a href="/contact"><h6>Contact Us</h6></a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <h3 class="text-center">
+                                                                                            <a href="#">
+                                                                                                <img alt="Back to top" src="~/assets/img/footer/top-arrow.svg"
+                                                                                                     class="rotate-360-clockwise">
+                                                                                                </a>
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </footer>
+                                                                                    <!-- footer end -->
+                                                                                    <!-- footer bottom — NOT CHANGED -->
+                                                                                    <div class="footer-bottom">
+                                                                                        <div class="container">
+                                                                                            <div class="row">
+                                                                                                <div class="col-lg-4 text-lg-start text-center py-lg-2 pt-2">
+                                                                                                    <p class="mb-0">&copy; @DateTime.Now.Year Duffl Digital Private Limited</p>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 text-center py-lg-2 py-2" style="color:#E2E2E2;">
+                                                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">Disclaimer</a> |
+                                                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#Privacy">Privacy Policy</a>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 text-lg-end text-center py-lg-2 pb-2">
+                                                                                                    <a href="/" target="_blank">Of Course Duffl Digital</a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <!-- Disclaimer Modal — NOT CHANGED -->
+                                                                                        <div class="modal" id="myModal">
+                                                                                            <div class="modal-dialog">
+                                                                                                <div class="modal-content">
+                                                                                                    <div class="modal-header">
+                                                                                                        <h4 class="modal-title">Disclaimer</h4>
+                                                                                                        <button type="button" class="btn-closee" data-bs-dismiss="modal">X</button>
+                                                                                                    </div>
+                                                                                                    <div class="modal-body">
+                                                                                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <!-- Privacy Policy Modal — NOT CHANGED -->
+                                                                                        <div class="modal" id="Privacy">
+                                                                                            <div class="modal-dialog">
+                                                                                                <div class="modal-content">
+                                                                                                    <div class="modal-header">
+                                                                                                        <h4 class="modal-title">Privacy Policy</h4>
+                                                                                                        <button type="button" class="btn-closee" data-bs-dismiss="modal">X</button>
+                                                                                                    </div>
+                                                                                                    <div class="modal-body">
+                                                                                                        <p>
+                                                                                                            We are dedicated to preserving your personal data and
+                                                                                                            respecting your right to privacy.
+                                                                                                        </p>
+                                                                                                        <h2><b style="font-size:18px;">We may collect personal information:</b></h2>
+                                                                                                        <p class="mb-0">
+                                                                                                            Contact: your name, email address, phone number,
+                                                                                                            and postal address.
+                                                                                                        </p>
+                                                                                                        <p class="mb-0">Usage: IP addresses, device information, browser type.</p>
+                                                                                                        <br>
+                                                                                                        <h2><b style="font-size:18px;">Sharing Your Information</b></h2>
+                                                                                                        <p class="mb-0">
+                                                                                                            Your personal information is never distributed
+                                                                                                            to outside parties.
+                                                                                                        </p>
+                                                                                                        <br>
+                                                                                                        <h2><b style="font-size:18px;">Get in touch with us</b></h2>
+                                                                                                        <p class="mb-0">
+                                                                                                            Please contact us at —
+                                                                                                            <a href="mailto:reachout@duffldigital.com" style="color:#f76200;">
+                                                                                                                reachout@duffldigital.com
+                                                                                                            </a>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- footer bottom end -->
+                                                                                    <!-- thank you modal — NOT CHANGED -->
+                                                                                    <div id="thankyou" class="modal success" style="display:none;">
+                                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                                            <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                    <p id="closethankyou" class="btn-closee close" style="cursor:pointer;">X</p>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+                                                                                                    <div class="p-3 text-center">
+                                                                                                        <h1><img src="~/assets/img/tick-duffl.svg" alt="Success"></h1>
+                                                                                                        <h4 class="pt-3" style="font-size:30px;">Thank you!</h4>
+                                                                                                        <p>Your application has been submitted.</p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- thank you modal end -->
+                                                                                    <!-- scripts -->
+                                                                                    <script src="~/assets/js/jquery.min.js"></script>
+                                                                                    <script src="~/assets/js/aos.js"></script>
+                                                                                    <script src="~/assets/js/jquery.fancybox.min.js"></script>
+                                                                                    <script src="~/assets/js/bootstrap-bundle.min.js"></script>
+                                                                                    <script src="~/assets/js/main.js"></script>
+                                                                                    <script src="~/assets/js/new-header.js"></script>
+                                                                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+                                                                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+                                                                                    <script>
+                                                                                        AOS.init();
+
+                                                                                        // ===== Thank You Popup =====
+                                                                                        @if (TempData["Success"] != null)
+                                                                                        {
+                                                                                            <text>
+                                                                                                document.getElementById('thankyou').style.display = 'flex';
+                                                                                            </text>
+                                                                                        }
+
+                                                                                        document.getElementById('closethankyou').addEventListener('click', function () {
+                                                                                        document.getElementById('thankyou').style.display = 'none';
+                                                                                        });
+
+                                                                                        // ===== Show/Hide Experienced Fields =====
+                                                                                        document.getElementById('ddlExperience').addEventListener('change', function () {
+                                                                                        var val = this.value;
+                                                                                        if (val === 'Experienced') {
+                                                                                        document.getElementById('experiencedFields').style.display = 'block';
+                                                                                        } else {
+                                                                                        document.getElementById('experiencedFields').style.display = 'none';
+                                                                                        document.getElementById('employedYesFields').style.display = 'none';
+                                                                                        document.getElementById('employedNoFields').style.display  = 'none';
+                                                                                        document.getElementById('ddlCurrentEmployed').value = '';
+                                                                                        }
+                                                                                        });
+
+                                                                                        // ===== Show/Hide Currently Employed Yes/No =====
+                                                                                        document.getElementById('ddlCurrentEmployed').addEventListener('change', function () {
+                                                                                        var val = this.value;
+                                                                                        if (val === 'Y') {
+                                                                                        document.getElementById('employedYesFields').style.display = 'block';
+                                                                                        document.getElementById('employedNoFields').style.display  = 'none';
+                                                                                        } else if (val === 'N') {
+                                                                                        document.getElementById('employedYesFields').style.display = 'none';
+                                                                                        document.getElementById('employedNoFields').style.display  = 'block';
+                                                                                        } else {
+                                                                                        document.getElementById('employedYesFields').style.display = 'none';
+                                                                                        document.getElementById('employedNoFields').style.display  = 'none';
+                                                                                        }
+                                                                                        });
+
+                                                                                        // ===== Restore Fields on Validation Fail =====
+                                                                                        window.addEventListener('DOMContentLoaded', function () {
+                                                                                        var expVal = document.getElementById('ddlExperience').value;
+                                                                                        if (expVal === 'Experienced') {
+                                                                                        document.getElementById('experiencedFields').style.display = 'block';
+                                                                                        var empVal = document.getElementById('ddlCurrentEmployed').value;
+                                                                                        if (empVal === 'Y') {
+                                                                                        document.getElementById('employedYesFields').style.display = 'block';
+                                                                                        } else if (empVal === 'N') {
+                                                                                        document.getElementById('employedNoFields').style.display = 'block';
+                                                                                        }
+                                                                                        }
+                                                                                        });
+
+                                                                                        // ===== Input Focus Animation — NOT CHANGED =====
+                                                                                        document.querySelectorAll('input').forEach(function (input) {
+                                                                                        input.addEventListener('focus', function () {
+                                                                                        this.closest('.form-group')?.classList.add('focused');
+                                                                                        });
+                                                                                        input.addEventListener('blur', function () {
+                                                                                        if (this.value === '') {
+                                                                                        this.classList.remove('filled');
+                                                                                        this.closest('.form-group')?.classList.remove('focused');
+                                                                                        } else {
+                                                                                        this.classList.add('filled');
+                                                                                        }
+                                                                                        });
+                                                                                        });
+                                                                                        // ===== FILE NAME DISPLAY AFTER UPLOAD =====
+                                                                                        document.getElementById('flPaper').addEventListener('change', function () {
+                                                                                      
+
+                                                                                        var display = document.getElementById('fileNameDisplay');
+                                                                                        //  ↑ gets the span where we show filename
+
+                                                                                        if (this.files && this.files.length > 0) {
+
+                                                                                        var fileName = this.files[0].name;
+                                                                                        //  ↑ e.g. "MyResume.pdf"
+
+                                                                                        var fileSize = (this.files[0].size / 1024 / 1024).toFixed(2);
+                                                                                        //  ↑ converts bytes → MB  e.g. "0.85"
+
+                                                                                        // Client side file size check
+                                                                                        if (this.files[0].size > 5 * 1024 * 1024) {
+                                                                                        // ❌ File too large
+                                                                                        display.textContent = fileName + ' exceeds 5MB!';
+                                                                                        display.style.color = '#ff4444';
+                                                                                        this.value = ''; // clears the selection
+                                                                                        } else {
+                                                                                        // ✅ File ok — show name and size
+                                                                                        display.textContent =  fileName + ' (' + fileSize + ' MB)';
+                                                                                        display.style.color = '#aaa';
+                                                                                        }
+
+                                                                                        } else {
+                                                                                        display.textContent = 'No file chosen';
+                                                                                        display.style.color = '#aaa';
+                                                                                        }
+                                                                                        });
+                                                                                    </script>
+                                                                                    <!-- scripts end -->
+
+                                                                                </body>
+                                                                            </html>

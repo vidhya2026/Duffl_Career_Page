@@ -1,0 +1,406 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Duffl Digital</title>
+    <meta name="title" content="Careers - Duffl Digital">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta property="og:image" content="https://dufflpreview.in/duffl-digital/assets/img/duffl-digital.jpg">
+    <link rel="shortcut icon" href="~/assets/img/fav-icon.png">
+
+        <link rel="stylesheet" type="text/css" href="~/assets/css/jquery.fancybox.min.css">
+            <link href="~/assets/css/bootstrap5-3-2.min.css" rel="stylesheet">
+                <link href="~/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+                    <link href="~/assets/css/popup.css" rel="stylesheet">
+                        <link href="~/assets/css/sticky.css" rel="stylesheet">
+                            <link href="~/assets/css/aos.css" rel="stylesheet">
+                                <link rel="stylesheet" href="~/assets/css/careers.css">
+                                    <link rel="stylesheet" href="~/assets/css/header-two.css">
+                                        <link rel="stylesheet" href="~/assets/css/footer.css">
+                                        </head>
+                                        <body>
+
+                                            <!-- header -->
+                                            <div class="menu-set" id="menu-set">
+                                                <div class="container">
+                                                    <div class="menu-design position-relative">
+
+                                                        <p class="close-menu" id="close-menu"><i class="bi bi-x"></i></p>
+
+                                                        <ul class="d-flex flex-wrap align-items-center">
+                                                            <li>
+                                                                <h5>01</h5>
+                                                                <a href="index.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Home</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>02</h5>
+                                                                <a href="service.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Services</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>03</h5>
+                                                                <a href="case-studies.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Case Studies</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>04</h5>
+                                                                <a href="protfolio-website.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Our Works</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>05</h5>
+                                                                <a href="blog.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Blog</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>06</h5>
+                                                                <a href="team.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Team</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>07</h5>
+                                                                <a href="careers.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Careers</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>08</h5>
+                                                                <a href="testimonial.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Testimonial</h6>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <h5>09</h5>
+                                                                <a href="Contact.html">
+                                                                    <h6 class="wobble" data-animation="xspin">Contact</h6>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <header>
+                                                <div class="container">
+                                                    <div class="site-logo">
+                                                        <a href="index.html">
+                                                            <img alt="img" src="~/assets/img/site-logo.png" class="img-fluid">
+                                                            </a>
+                                                        </div>
+                                                        <div class="menu-bar">
+                                                            <img alt="img" src="~/assets/img/menu-bar.png" class="img-fluid" id="btn">
+                                                                <nav id="menu" class="main-menu"></nav>
+                                                            </div>
+                                                        </div>
+                                                    </header>
+                                                    <!-- header -->
+                                                    <!-- sticky -->
+                                                    <div class="sticky-set">
+                                                        <div class="sticky-icon">
+                                                            <a href="https://wa.me/916379150368">
+                                                                <img alt="img" src="~/assets/img/sticky-icon/whatsapp.svg" class="img-fluid">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- contact popup modal -->
+                                                        <div class="modal modal-lg" id="pop-form">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <form class="modal-form">
+                                                                        <h1>Let's Get in Touch</h1>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6">
+                                                                                <div class="form-right position-relative pop-form">
+                                                                                    <form>
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label form-label-white" for="first">Name*</label>
+                                                                                            <input id="first" class="form-input form-input-line pop-input" type="text">
+                                                                                            <span>Error-msg</span>
+                                                                                        </div>
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label form-label-white" for="first">WhatsApp Number*</label>
+                                                                                            <input id="first" class="form-input form-input-line pop-input">
+                                                                                            <span>Error-msg</span>
+                                                                                        </div>
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label form-label-white" for="first">Email Id*</label>
+                                                                                            <input id="first" class="form-input form-input-line pop-input" type="email">
+                                                                                            <span>Error-msg</span>
+                                                                                        </div>
+                                                                                        <select name="potencial" id="potencial"
+                                                                                                class="custom-select sources input-margin w-100 form-group form-input-line form-label-white">
+                                                                                            <option value="DH" selected>Services Interested in?</option>
+                                                                                            <option value="A">A</option>
+                                                                                            <option value="B">B</option>
+                                                                                            <option value="C">C</option>
+                                                                                            <option value="D">D</option>
+                                                                                        </select>
+                                                                                        <div class="form-group input-margin">
+                                                                                            <label class="form-label form-label-white" for="first">Message*</label>
+                                                                                            <input id="first" class="form-input form-input-line pop-input" type="text">
+                                                                                            <span>Error-msg</span>
+                                                                                        </div>
+                                                                                        <h3 class="form-label-white">Verify Captcha</h3>
+                                                                                        <div class="d-flex" style="gap:10px;">
+                                                                                            <h4 class="form-label-white">2 + 3 =</h4>
+                                                                                            <input class="last-input form-input-line pop-input">
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 d-flex justify-content-center position-relative mobile-view-none">
+                                                                                <img alt="img" src="~/assets/img/contact/svg/float-blup.svg" class="float-img">
+                                                                                    <p class="content-side">We can talk<br>about your<br>needs.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <a href="">
+                                                                                <div class="Submit-btn">Submit</div>
+                                                                            </a>
+                                                                        </form>
+                                                                        <div class="modal-footer pop-footer">
+                                                                            <button type="button" class="btn" data-bs-dismiss="modal">X</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- sticky -->
+                                                            <!-- banner -->
+                                                            <div class="banner-section">
+                                                                <div class="container">
+                                                                    <h1>Join Our Mission</h1>
+                                                                    <h6 class="m-0">Careers</h6>
+                                                                </div>
+                                                            </div>
+                                                            <!-- banner -->
+                                                            <!-- main content -->
+                                                            <section class="black-section">
+                                                                <div class="container">
+                                                                    <p class="top-content">We are always looking for talented and motivated individuals to join our team as we innovate and explore new service areas and technologies.</p>
+                                                                    <div class="row vacancy-set">
+                                                                        <div class="col-lg-6 col-md-6" data-aos="fade-up">
+                                                                            <div class="Graphic-Design same-content overlay-anim">
+                                                                                <a href="careers-details.html">
+                                                                                    <img alt="img" src="~/assets/img/career/svg/top-arrow.svg" class="img-content-arrow">
+                                                                                    </a>
+                                                                                    <h1>Graphic Design</h1>
+                                                                                    <p>As a Graphic Designer at Duffl Digital, you'll play a key role in creating engaging visual content to convey our clients' brand messages.</p>
+                                                                                    <a href="careers-details.html">
+                                                                                        <h6 class="text-end pe-4">
+                                                                                            <button>Apply Now</button>
+                                                                                        </h6>
+                                                                                    </a>
+                                                                                    <img alt="img" src="~/assets/img/career/svg/gd.svg" class="p-0 Graphic-Design-icon">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6" data-aos="fade-up">
+                                                                                    <div class="Digital-Marketing same-content overlay-anim">
+                                                                                        <a href="">
+                                                                                            <img alt="img" src="~/assets/img/career/svg/top-arrow.svg" class="img-content-arrow">
+                                                                                            </a>
+                                                                                            <h1>Digital Marketing</h1>
+                                                                                            <p>Our Digital Marketing team is committed to creating innovative campaigns that engage and produce tangible results.</p>
+                                                                                            <h6 class="text-end pe-4">
+                                                                                                <button>Apply Now</button>
+                                                                                            </h6>
+                                                                                            <img alt="img" src="~/assets/img/career/svg/Marketing.svg" class="p-0 Marketing-icon">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-lg-6 col-md-6" data-aos="fade-up">
+                                                                                            <div class="UI-UX-Design Digital-Marketing same-content overlay-anim">
+                                                                                                <a href="">
+                                                                                                    <img alt="img" src="~/assets/img/career/svg/top-arrow.svg" class="img-content-arrow">
+                                                                                                    </a>
+                                                                                                    <h1>UI/UX Design</h1>
+                                                                                                    <p>If you have a keen eye for detail and a deep understanding of user behavior, we want you on our team of UI/UX designers who transform ideas into visually stunning digital products.</p>
+                                                                                                    <h6 class="text-end pe-4">
+                                                                                                        <button>Apply Now</button>
+                                                                                                    </h6>
+                                                                                                    <img alt="img" src="~/assets/img/career/svg/ui-ux.svg" class="p-0 UX-Design-icon">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-6 col-md-6" data-aos="fade-up">
+                                                                                                    <div class="UI-Development same-content Graphic-Design overlay-anim">
+                                                                                                        <a href="">
+                                                                                                            <img alt="img" src="~/assets/img/career/svg/top-arrow.svg" class="img-content-arrow">
+                                                                                                            </a>
+                                                                                                            <h1>UI Development</h1>
+                                                                                                            <p>Your work will ensure that our designs are not only visually appealing but also highly functional and responsive across all devices.</p>
+                                                                                                            <h6 class="text-end pe-4 pt-4">
+                                                                                                                <button>Apply Now</button>
+                                                                                                            </h6>
+                                                                                                            <img alt="img" src="~/assets/img/career/svg/devel.svg" class="p-0 UI-Development-icon">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="meet-team">
+                                                                                                        <div class="row culture-set">
+                                                                                                            <div class="col-lg-3 col-md-12">
+                                                                                                                <h6>Meet our Team</h6>
+                                                                                                                <p>Discover the dynamic and supportive work culture at <span>Duffl Digital.</span></p>
+                                                                                                                <p>
+                                                                                                                    <button>Learn More<img alt="img" src="~/assets/img/team/svg/arrow.svg" class="ms-2"></button>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <div class="col-lg-2 col-md-12"></div>
+                                                                                                            <div class="col-lg-5 col-md-12">
+                                                                                                                <h1>People and Culture</h1>
+                                                                                                                <div class="d-flex culture-image">
+                                                                                                                    <div class="culture">
+                                                                                                                        <img alt="img" src="~/assets/img/career/meet-team-pic.jpg" class="img-fluid">
+                                                                                                                        </div>
+                                                                                                                        <div class="culture join">
+                                                                                                                            <img alt="img" src="~/assets/img/career/meet-team-pic-two.png" class="img-fluid">
+                                                                                                                            </div>
+                                                                                                                            <div class="culture join join-two">
+                                                                                                                                <img alt="img" src="~/assets/img/career/meet-team-pic-three.png" class="img-fluid">
+                                                                                                                                </div>
+                                                                                                                                <div class="culture join join-three">
+                                                                                                                                    <img alt="img" src="~/assets/img/career/meet-team-pic-four.png" class="img-fluid">
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </section>
+                                                                                                            <!-- main content -->
+                                                                                                            <!-- footer -->
+                                                                                                            <footer data-aos="fade-up">
+                                                                                                                <div class="container">
+                                                                                                                    <h1 class="text-center position-relative">
+                                                                                                                        <a href="index.html">
+                                                                                                                            <img alt="img" src="~/assets/img/footer/Group.svg">
+                                                                                                                            </a>
+                                                                                                                        </h1>
+                                                                                                                        <div class="menu-set-footer">
+                                                                                                                            <div class="row align-items-center">
+                                                                                                                                <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                                                                                                                                    <div class="four-menu four-menu-line">
+                                                                                                                                        <a href="service.html"><h6>Services</h6></a>
+                                                                                                                                        <a href="case-studies.html"><h6>Case studies</h6></a>
+                                                                                                                                        <a href="protfolio-website.html"><h6>Portfolio</h6></a>
+                                                                                                                                        <a href="careers.html"><h6>Careers</h6></a>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div class="col-lg-4 col-md-4 col-sm-4 col-2">
+                                                                                                                                    <div class="icon">
+                                                                                                                                        <a href="https://www.instagram.com/duffldigital?igsh=MXQwcjZqdnFyNjhlMA==" target="_blank" rel="noopener">
+                                                                                                                                            <img alt="img" src="~/assets/img/footer/insta.svg">
+                                                                                                                                            </a>
+                                                                                                                                            <a href="https://www.linkedin.com/company/duffldigital/" target="_blank" rel="noopener">
+                                                                                                                                                <img alt="img" src="~/assets/img/footer/indeed.svg">
+                                                                                                                                                </a>
+                                                                                                                                                <a href="https://www.facebook.com/duffldigital" target="_blank" rel="noopener">
+                                                                                                                                                    <img alt="img" src="~/assets/img/footer/fb.svg">
+                                                                                                                                                    </a>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                                                                                                                                                <div class="four-menu">
+                                                                                                                                                    <a href="testimonial.html"><h6>Testimonial</h6></a>
+                                                                                                                                                    <a href="team.html"><h6>Team</h6></a>
+                                                                                                                                                    <a href="blog.html"><h6>Blog</h6></a>
+                                                                                                                                                    <a href="Contact.html"><h6>Contact Us</h6></a>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                    <h3 class="text-center">
+                                                                                                                                        <a href="#">
+                                                                                                                                            <img alt="img" src="~/assets/img/footer/top-arrow.svg" class="rotate-360-clockwise">
+                                                                                                                                            </a>
+                                                                                                                                        </h3>
+                                                                                                                                    </div>
+                                                                                                                                </footer>
+
+                                                                                                                                <!-- footer bottom -->
+                                                                                                                                <div class="footer-bottom">
+                                                                                                                                    <div class="container">
+                                                                                                                                        <div class="row">
+                                                                                                                                            <div class="col-lg-4 text-lg-start text-center py-lg-2 pt-2">
+                                                                                                                                                <p class="mb-0">&copy; @DateTime.Now.Year Duffl Digital Private Limited</p>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="col-lg-4 text-center py-lg-2 py-2" style="color:#E2E2E2;">
+                                                                                                                                                <a href="" data-bs-toggle="modal" data-bs-target="#myModal">Disclaimer</a> |
+                                                                                                                                                <a href="" data-bs-toggle="modal" data-bs-target="#Privacy">Privacy Policy</a>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="col-lg-4 col-xl-4 text-lg-end text-center py-lg-2 pb-2">
+                                                                                                                                                <a href="index.html" target="_blank">Of Course Duffl Digital</a>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+
+                                                                                                                                    <!-- Disclaimer Modal -->
+                                                                                                                                    <div class="modal" id="myModal">
+                                                                                                                                        <div class="modal-dialog">
+                                                                                                                                            <div class="modal-content">
+                                                                                                                                                <div class="modal-header">
+                                                                                                                                                    <h4 class="modal-title">Disclaimer</h4>
+                                                                                                                                                    <button type="button" class="btn-closee" data-bs-dismiss="modal">X</button>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="modal-body">
+                                                                                                                                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias nulla perspiciatis ratione provident. Totam quas laudantium suscipit molestias praesentium, exercitationem earum recusandae necessitatibus quod, labore autem fugiat amet fuga vero.
+                                                                                                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, obcaecati doloremque? Dolore id quod quasi quaerat eos asperiores quam. Voluptates debitis odit at minima voluptatibus mollitia, labore ducimus nobis cupiditate.
+                                                                                                                                                    <br><br><br>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+
+                                                                                                                                    <!-- Privacy Policy Modal -->
+                                                                                                                                    <div class="modal" id="Privacy">
+                                                                                                                                        <div class="modal-dialog">
+                                                                                                                                            <div class="modal-content">
+                                                                                                                                                <div class="modal-header">
+                                                                                                                                                    <h4 class="modal-title">Privacy Policy</h4>
+                                                                                                                                                    <button type="button" class="btn-closee" data-bs-dismiss="modal">X</button>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="modal-body">
+                                                                                                                                                    <div class="modal-body">
+                                                                                                                                                        <p>We are dedicated to preserving your personal data and respecting your right to privacy.</p>
+                                                                                                                                                        <h2><b style="font-size:18px;">We may collect personal information :</b></h2>
+                                                                                                                                                        <p class="mb-0">Contact : your name, email address, phone number, and postal address</p>
+                                                                                                                                                        <p class="mb-0">Usage : website and services, such as IP addresses, device information, browser type Accounts</p>
+                                                                                                                                                        <br>
+                                                                                                                                                        <h2><b style="font-size:18px;">Sharing Your Information</b></h2>
+                                                                                                                                                        <p class="mb-0">Your personal information is never distributed to outside parties by us. Your information is private and secure with us at all times.</p>
+                                                                                                                                                        <br>
+                                                                                                                                                        <h2><b style="font-size:18px;">Get in touch with us</b></h2>
+                                                                                                                                                        <p class="mb-0">
+                                                                                                                                                            Please get in touch with us at if you have any queries -
+                                                                                                                                                            <a href="mailto:reachout@duffldigital.com" style="color:#f76200;">
+                                                                                                                                                                reachout@duffldigital.com
+                                                                                                                                                            </a>
+                                                                                                                                                        </p>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <!-- footer bottom -->
+                                                                                                                                <!-- scripts -->
+                                                                                                                                <script src="~/assets/js/jquery.min.js"></script>
+                                                                                                                                <script src="~/assets/js/aos.js"></script>
+                                                                                                                                <script src="~/assets/js/jquery.fancybox.min.js"></script>
+                                                                                                                                <script src="~/assets/js/bootstrap-bundle.min.js"></script>
+                                                                                                                                <script src="~/assets/js/main.js"></script>
+                                                                                                                                <script src="~/assets/js/header.js"></script>
+                                                                                                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+                                                                                                                            </body>
+                                                                                                                        </html>

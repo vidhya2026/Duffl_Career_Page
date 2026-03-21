@@ -1,0 +1,954 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duffl Digital</title>
+    <meta name="title" content="Duffl Digital">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta property="og:image" content="https://dufflpreview.in/duffl-digital/assets/img/duffl-digital.jpg">
+    <link rel="shortcut icon" href="~/assets/img/fav-icon.png">
+
+    <link rel="stylesheet" type="text/css" href="~/assets/css/jquery.fancybox.min.css">
+    <link href="~/assets/css/bootstrap5-3-2.min.css" rel="stylesheet">
+    <link href="~/assets/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/css/popup.css" rel="stylesheet">
+    <link href="~/assets/css/sticky.css" rel="stylesheet">
+    <link href="~/assets/css/aos.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link href="~/assets/css/header-two.css" rel="stylesheet">
+    <link href="~/assets/css/new-header.css" rel="stylesheet">
+    <link href="~/assets/css/slick.css" rel="stylesheet">
+    <link href="~/assets/css/logo.css" rel="stylesheet">
+    <link href="~/assets/css/sevice.css" rel="stylesheet">
+    <link href="~/assets/css/footer.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slick-theme.css">
+
+    <style>
+        .category-button {
+            gap: 94px;
+        }
+
+        .toggle {
+            top: 100px;
+        }
+
+        .toggle__span {
+            background-color: #fff;
+        }
+
+        body:not(.menu_open) .home-header {
+            z-index: 6;
+        }
+
+        body {
+            background-color: #333;
+        }
+
+        .slide img {
+            width: 150px;
+            height: 100px;
+            animation: scroll 60s linear infinite;
+        }
+
+        .slide-track {
+            width: 100%;
+            display: flex;
+            gap: 6em;
+            overflow: hidden;
+        }
+
+        .slider-logo {
+            background-color: #ffcd0c;
+            padding: 28px 0px 60px 0;
+            border-bottom: 1px solid;
+            background-image: url(~/assets/img/index/Our-Clients.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        @@keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translatex(-1000%); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- new-header -->
+    <div class="new-header">
+        <div class="flex-box box-left"></div>
+        <div class="flex-box"></div>
+        <div class="flex-box box-right">
+            <div class="menu">
+                <ul class="menu__list">
+                    <li class="menu__item"><a href="index.html">Home</a></li>
+                    <li class="menu__item"><a href="case-studies.html">Case Studies</a></li>
+                    <li class="menu__item dropdown-holder dropdown-holder1">
+                        <a href="blog.html">Blog</a>
+                    </li>
+                    <li class="menu__item dropdown-holder">
+                        <a href="careers.html">Careers</a>
+                    </li>
+                    <li class="menu__item"><a href="Contact.html">Contact</a></li>
+                    <li class="menu__item"><a href="service.html">Services</a></li>
+                    <li class="menu__item"><a href="portfolio-website.html">Our Works</a></li>
+                    <li class="menu__item"><a href="team.html">Team</a></li>
+                    <li class="menu__item"><a href="testimonial.html">Testimonial</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- home header -->
+    <div class="home-header">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <a href="index.html">
+                    <div class="home-logo">
+                        <img alt="img" src="~/assets/img/logo.png" class="img-fluid">
+                    </div>
+                </a>
+                <button class="header-btn">
+                    <a href="Contact.html" class="d-flex align-items-center justify-content-around">
+                        <h1>Drop Us a Line</h1>
+                        <img alt="img" src="~/assets/img/index/link-icon.svg">
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- sec-video -->
+    <div class="sec-video">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="myVideo" playsinline width="100%">
+            <source src="~/assets/video/home-banner-video.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <div class="toggle">
+                <span class="toggle__span"></span>
+                <span class="toggle__span"></span>
+                <span class="toggle__span"></span>
+            </div>
+            <div class="brand-name">
+                <img alt="img" src="~/assets/img/index/svg/banner-logo-name.svg" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <!-- sec-video end -->
+
+    <!-- sticky -->
+    <div class="sticky-set">
+        <div class="sticky-icon">
+            <a href="https://wa.me/916379150368">
+                <img alt="img" src="~/assets/img/sticky-icon/whatsapp.svg" class="img-fluid">
+            </a>
+        </div>
+    </div>
+
+    <!-- contact popup modal -->
+    <div class="modal modal-lg" id="pop-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="modal-form">
+                    <h1>Let's Get in Touch</h1>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-right position-relative pop-form">
+                                <form>
+                                    <div class="form-group input-margin">
+                                        <label class="form-label form-label-white" for="first">Name*</label>
+                                        <input id="first" class="form-input form-input-line pop-input" type="text">
+                                        <span>Error-msg</span>
+                                    </div>
+                                    <div class="form-group input-margin">
+                                        <label class="form-label form-label-white" for="first">WhatsApp Number*</label>
+                                        <input id="first" class="form-input form-input-line pop-input">
+                                        <span>Error-msg</span>
+                                    </div>
+                                    <div class="form-group input-margin">
+                                        <label class="form-label form-label-white" for="first">Email Id*</label>
+                                        <input id="first" class="form-input form-input-line pop-input" type="email">
+                                        <span>Error-msg</span>
+                                    </div>
+                                    <select name="potencial" id="potencial"
+                                            class="custom-select sources input-margin w-100 form-group form-input-line form-label-white">
+                                        <option value="DH" selected>Services Interested in?</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                    <div class="form-group input-margin">
+                                        <label class="form-label form-label-white" for="first">Message*</label>
+                                        <input id="first" class="form-input form-input-line pop-input" type="text">
+                                        <span>Error-msg</span>
+                                    </div>
+                                    <h3 class="form-label-white">Verify Captcha</h3>
+                                    <div class="d-flex" style="gap:10px;">
+                                        <h4 class="form-label-white">2 + 3 =</h4>
+                                        <input class="last-input form-input-line pop-input">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-center position-relative mobile-view-none">
+                            <img alt="img" src="~/assets/img/contact/svg/float-blup.svg" class="float-img">
+                            <p class="content-side">We can talk<br>about your<br>needs.</p>
+                        </div>
+                    </div>
+                    <a href="">
+                        <div class="Submit-btn">Submit</div>
+                    </a>
+                </form>
+                <div class="modal-footer pop-footer">
+                    <button type="button" class="btn" data-bs-dismiss="modal">X</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sticky -->
+
+    <div class="bg-color">
+
+        <!-- slider-list -->
+        <div class="slider-list">
+            <div class="overlay"></div>
+            <div class="list-scroll" id="tags">
+                <div><li>Branding</li></div>
+                <div><li>Design</li></div>
+                <div><li>Marketing</li></div>
+                <div><li>Digital</li></div>
+                <div><li>web development</li></div>
+                <div><li>Creative</li></div>
+                <div><li>Innovation</li></div>
+                <div><li>Software</li></div>
+                <div><li>Transform</li></div>
+                <div><li>Envision</li></div>
+            </div>
+        </div>
+        <!-- slider-list end -->
+
+        <!-- section-two -->
+        <div class="section-two">
+            <div class="container">
+                <div class="section-two-content">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-12">
+                            <p>A sharp-focused digital media outfit, young by heart and existence, we leave our work and approach to speak for us and so that's the reason you have quickly reached the end of this About section.</p>
+                        </div>
+                        <div class="col-lg-6 col-12 gap-padding-none position-relative">
+                            <h6>We create exceptional digital products and websites from the ground up.</h6>
+                            <div class="sun-light">
+                                <img alt="img" src="~/assets/img/index/sun-light.png" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- section-two end -->
+
+        <!-- client logo (d-none hidden) -->
+        <div class="client-logo d-none">
+            <div class="auto-scroll" id="gallery">
+                <img alt="img" src="~/assets/img/testimonial/elac.png" class="img-fluid me-5 elac">
+                <img alt="img" src="~/assets/img/testimonial/isha-life.png" class="img-fluid me-5 isha-life">
+                <img alt="img" src="~/assets/img/testimonial/ifa.jpg" class="img-fluid me-5 ifa">
+                <img alt="img" src="~/assets/img/testimonial/pm.jpg" class="img-fluid me-5 pm">
+                <img alt="img" src="~/assets/img/testimonial/point.png" class="img-fluid me-5 point">
+                <img alt="img" src="~/assets/img/testimonial/uniq.jpg" class="img-fluid me-5 uniq">
+                <img alt="img" src="~/assets/img/testimonial/la palmera.jpg" class="img-fluid me-5 la-palmera">
+                <img alt="img" src="~/assets/img/testimonial/pixel.jpg" class="img-fluid me-5 pixel">
+                <img alt="img" src="~/assets/img/testimonial/klp.jpg" class="img-fluid me-5 klp">
+                <img alt="img" src="~/assets/img/testimonial/panobiz.jpg" class="img-fluid me-5 panobiz">
+                <img alt="img" src="~/assets/img/testimonial/sprayla.jpg" class="img-fluid me-5 sprayla">
+                <img alt="img" src="~/assets/img/testimonial/mico.jpg" class="img-fluid me-5 mico">
+            </div>
+            <div class="auto-scroll" id="gallery-two">
+                <img alt="img" src="~/images/Logos2/vikatan.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/itc-logo.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/izmirilian.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/urbando-new.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/naruvi_logo.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/braintrust.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/ss-buildtech-logo.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/krishna.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/trisquare-logo.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/candyvalley.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/hmh.png" class="img-fluid me-5">
+                <img alt="img" src="~/images/Logos2/finzapp.png" class="img-fluid me-5 mico">
+            </div>
+        </div>
+
+        <!-- slider-logo (final logo scroll) -->
+        <div class="slider-logo">
+            <div class="slide-track">
+                <div class="slide"><img src="~/images/Logos2/logo-black/elac.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/isha.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/ifa.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/pmu.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/points.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/pixel.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/klp.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/panobiz.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/sprayla.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/mico.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/TWB.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/iris.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/etihad-towers.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/la-palmera.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/agarwal.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/urbando.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/athithi.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/tl.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/viha-home.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/satya-school.svg" alt=""></div>
+            </div>
+            <div class="slide-track sec-row" style="padding-top:70px;">
+                <div class="slide"><img src="~/images/Logos2/logo-black/uniq.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/krishna-group.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/trisquare.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/finzapp.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/hep.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/itc.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/izmirlian-foundation.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/naruvi.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/brain-trust.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/landmark.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/truestar.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/k-p-hospital.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/bilimle.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/vra.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/psmj.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/ramaka.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/vikatan.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/madras-coffee.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/green-place.svg" alt=""></div>
+                <div class="slide"><img src="~/images/Logos2/logo-black/celebrity.svg" alt=""></div>
+            </div>
+        </div>
+
+        <!-- Branding-section mobile -->
+        <section class="Branding-section d-none mobile-view-open">
+            <div class="container">
+                <div class="row m-0 justify-content-between">
+                    <div class="col-lg-12 p-0">
+                        <div class="accordion" id="brandingAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Branding
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                     aria-labelledby="headingOne" data-bs-parent="#brandingAccordion">
+                                    <div class="accordion-body">
+                                        <p class="side-content">We create identities that reflect who you are, and what you stand for, and build real connections with your audience. By combining creativity with deep understanding, we make sure your brand not only grabs attention but also sticks with people, leaving a lasting impression. Our branding isn't just about being noticed—it's about being remembered.</p>
+                                        <a href="service.html">
+                                            <button class="pt-4" style="color:#000;">
+                                                More <span><img alt="img" src="~/assets/img/index/top-arrow.svg" class="arrow-animation"></span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Digital Marketing
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo" data-bs-parent="#brandingAccordion">
+                                    <div class="accordion-body">
+                                        <p class="side-content">With expert know-how across every corner of the digital landscape—whether it's SEO, Facebook, Instagram, Google Ads, or email campaigns. Our digital marketing goes beyond just clicks and impressions. We focus on building real connections and driving meaningful results.</p>
+                                        <a href="service.html">
+                                            <button class="pt-4" style="color:#000;">
+                                                More <span><img alt="img" src="~/assets/img/index/top-arrow.svg" class="arrow-animation"></span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Web Development
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree" data-bs-parent="#brandingAccordion">
+                                    <div class="accordion-body">
+                                        <p class="side-content">We don't just create websites, we craft digital experiences that engage your audience and drive results. We ensure every detail is perfect, from seamless user interfaces to robust backend systems.</p>
+                                        <a href="service.html">
+                                            <button class="pt-4" style="color:#000;">
+                                                More <span><img alt="img" src="~/assets/img/index/top-arrow.svg" class="arrow-animation"></span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Mobile App Development
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse"
+                                     aria-labelledby="headingFour" data-bs-parent="#brandingAccordion">
+                                    <div class="accordion-body">
+                                        <p class="side-content">We don't just build apps—we create experiences. Our team of seasoned developers and creative minds is dedicated to turning your vision into a powerful, user-friendly app that stands out.</p>
+                                        <a href="service.html">
+                                            <button class="pt-4" style="color:#000;">
+                                                More <span><img alt="img" src="~/assets/img/index/top-arrow.svg" class="arrow-animation"></span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branding-section desktop -->
+        <section class="Branding-section mobile-view-none">
+            <div class="container">
+                <div class="row m-0 justify-content-between">
+                    <div class="col-lg-7">
+                        <div class="slider">
+                            <div class="wrap">
+                                <div class="Branding-heading highlight-border">
+                                    <a href="#section-1" class="category-button d-flex align-items-center w-100" data-target="tab1">
+                                        <div class="starting-line bg-gray"></div>
+                                        <h1 class="scroll-heading gray">Branding</h1>
+                                    </a>
+                                </div>
+                                <div class="Branding-heading">
+                                    <a href="#section-2" class="category-button d-flex align-items-center w-100" data-target="tab2">
+                                        <div class="starting-line bg-gray"></div>
+                                        <h1 class="scroll-heading gray">Digital Marketing</h1>
+                                    </a>
+                                </div>
+                                <div class="Branding-heading">
+                                    <a href="#section-3" class="category-button d-flex align-items-center w-100" data-target="tab3">
+                                        <div class="starting-line bg-gray"></div>
+                                        <h1 class="scroll-heading gray">Web Development</h1>
+                                    </a>
+                                </div>
+                                <div class="Branding-heading">
+                                    <a href="#section-4" class="category-button d-flex align-items-center w-100" data-target="tab4">
+                                        <div class="starting-line bg-gray"></div>
+                                        <h1 class="scroll-heading gray">Mobile App Development</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 p-0 position-relative">
+                        <div class="page-content tab1">
+                            <h1 class="side-content">We create identities that reflect who you are, and what you stand for, and build real connections with your audience. By combining creativity with deep understanding, we make sure your brand not only grabs attention but also sticks with people, leaving a lasting impression. Our branding isn't just about being noticed—it's about being remembered.</h1>
+                        </div>
+                        <div class="page-content tab2">
+                            <h1 class="side-content">With expert know-how across every corner of the digital landscape—whether it's SEO, Facebook, Instagram, Google Ads, or email campaigns. Our digital marketing goes beyond just clicks and impressions. We focus on building real connections and driving meaningful results. Crafting marketing strategies using the latest tools and trends that deliver outstanding results and top-notch ROIs.</h1>
+                        </div>
+                        <div class="page-content tab3">
+                            <h1 class="side-content">We don't just create websites, we craft digital experiences that engage your audience and drive results. We ensure every detail is perfect, from seamless user interfaces to robust backend systems. With us, you're not just getting a website—you're getting a powerful tool to grow your business from sleek corporate sites to complex e-commerce portals and web applications.</h1>
+                        </div>
+                        <div class="page-content tab4">
+                            <h1 class="side-content">We don't just build apps—we create experiences. Our team of seasoned developers and creative minds is dedicated to turning your vision into a powerful, user-friendly app that stands out. We ensure your app is tailored to your unique needs, driving engagement and success.</h1>
+                        </div>
+                        <div class="service-arrow">
+                            <img alt="img" src="~/assets/img/index/service-arrow-black.svg">
+                        </div>
+                        <a href="service.html">
+                            <button class="pt-4" style="color:#000;">
+                                More <span><img alt="img" src="~/assets/img/index/top-arrow-black.svg" class="arrow-animation"></span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Works -->
+        <div class="bg-yellow">
+            <div class="container">
+                <h1>Our Works</h1>
+            </div>
+        </div>
+        <div class="image-roll mysectiontopzero">
+            <div id="sec1" class="section screen slider position-relative screen-size">
+                <div class="overlay"></div>
+                <img alt="img" src="~/assets/img/index/website-lod.jpg" class="img-fluid mobile-view-none-scroll">
+                <img alt="img" src="~/assets/img/index/website-lod-mobile.jpg" class="img-fluid d-none mobile-view-open-scroll">
+                <h2 class="roll-heading">Websites</h2>
+            </div>
+            <div id="sec2" class="section slider position-relative screen-size">
+                <img alt="img" src="~/assets/img/index/logo.jpg" class="img-fluid mobile-view-none-scroll">
+                <img alt="img" src="~/assets/img/index/logo-mobile.jpg" class="img-fluid d-none mobile-view-open-scroll">
+                <h2 class="roll-heading">logo</h2>
+            </div>
+            <div id="sec3" class="section slider position-relative screen-size">
+                <div class="overlay"></div>
+                <img alt="img" src="~/assets/img/index/grapic.jpg" class="img-fluid mobile-view-none-scroll">
+                <img alt="img" src="~/assets/img/index/grapic-mobile.jpg" class="img-fluid d-none mobile-view-open-scroll">
+                <h2 class="roll-heading">Social Graphic</h2>
+            </div>
+            <div id="container">
+                <div id="box"></div>
+            </div>
+        </div>
+
+        <!-- blog-home -->
+        <section class="blog-home">
+            <div class="row m-0 position-relative">
+                <div class="col-lg-3 col-12 p-0 img-d-none">
+                    <img alt="img" src="~/assets/img/index/blog-logo.png" class="img-fluid blog-tap-set-img">
+                </div>
+                <div class="col-lg-9">
+                    <div class="blog-heading d-flex justify-content-between align-items-center pt-4">
+                        <h2>Blogs</h2>
+                        <a href="blog.html">
+                            <button class="me-5">
+                                Read More <span><img alt="img" src="~/assets/img/index/top-arrow.svg" class="arrow-animation"></span>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="yellow-box">
+                        <div class="blog-tap-set">
+                            <div class="row">
+                                <div class="col-lg-4 col-12 box-content">
+                                    <p>July 12, 2024</p>
+                                    <div class="d-flex align-items-center box-content m-space-none" style="gap:18px;">
+                                        <a href="blog-details.html"><h5>Revisiting the Myth of Colours and Design</h5></a>
+                                        <a href="blog-details.html"><img alt="img" src="~/assets/img/index/top-arrow-bg.svg" class="arrow-animation"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12 ps-5 box-content tap-line">
+                                    <p>July 12, 2024</p>
+                                    <div class="d-flex align-items-center box-content" style="gap:18px;">
+                                        <a href="blog-details-two.html"><h5>Handcrafted Designs vs Templates: A Closer Look</h5></a>
+                                        <a href="blog-details-two.html"><img alt="img" src="~/assets/img/index/top-arrow-bg.svg" class="arrow-animation"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12 ps-5 box-content tap-line">
+                                    <p>July 12, 2024</p>
+                                    <div class="d-flex align-items-center box-content" style="gap:18px;">
+                                        <a href="blog-details-three.html"><h5>Real Power of Target Profiling for Social Media</h5></a>
+                                        <a href="blog-details-three.html"><img alt="img" src="~/assets/img/index/top-arrow-bg.svg" class="arrow-animation"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- blog-home end -->
+
+        <!-- case-studies -->
+        <div class="case-studies">
+            <div class="case-studies-content">
+                <div class="overlay"></div>
+                <div class="container">
+                    <h1>Case Studies</h1>
+                    <p>Discover how we've transformed businesses with our innovative solutions. Explore our case studies to see the impact of our work.</p>
+                    <div class="text-center">
+                        <a href="case-studies.html">
+                            <button class="case-studies-link">
+                                See Our Work <img alt="img" src="~/assets/img/index/svg/top-arrow.svg" class="ps-3 arrow-animation">
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- case-studies end -->
+
+        <!-- Testimonial-section -->
+        <section class="Testimonial-section">
+            <div class="container">
+                <div class="row m-0 align-items-center change">
+                    <div class="col-lg-3 col-md-12 p-0">
+                        <div class="Clients-Say">
+                            <h2>What Our Clients Say</h2>
+                            <a href="testimonial.html">
+                                <button class="me-5">
+                                    Read More <span><img alt="img" src="~/assets/img/index/svg/top-arrow.svg" class="arrow-animation"></span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12 p-0">
+                        <h1>Testimonials</h1>
+                        <div class="row m-0 box-gap">
+                            <div class="col-lg-4 col-md-4 box-out-side" data-aos="fade-up">
+                                <div class="Testimonial-section-box position-relative">
+                                    <p>Lorem ipsum dolor sit amet . Tincidunt duis adipiscing sollicitudin hendrerit mauris gravida. Feugiat et auctor id sit. Arcu justo sit amet viverra sagittis blandit euismod auctor. Ridiculus facilisi nec non dolor.</p>
+                                    <div class="name">
+                                        <h5>Keerthi</h5>
+                                        <h6>Customer Integration Representative</h6>
+                                    </div>
+                                    <img alt="img" src="~/assets/img/index/svg/qotation.svg">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 box-out-side" data-aos="fade-up">
+                                <div class="Testimonial-section-box position-relative">
+                                    <p>Lorem ipsum dolor sit amet consectetur. Tincidunt duis adipiscing sollicitudin hendrerit mauris gravida. Feugiat et auctor id sit.</p>
+                                    <div class="name">
+                                        <h5>Dhilip</h5>
+                                        <h6>Customer Integration Representative</h6>
+                                    </div>
+                                    <img alt="img" src="~/assets/img/index/svg/qotation.svg">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 box-out-side" data-aos="fade-up">
+                                <div class="Testimonial-section-box position-relative">
+                                    <p>Lorem ipsum dolor sit amet consectetur. Tincidunt duis adipiscing sollicitudin hendrerit mauris gravida.</p>
+                                    <div class="name">
+                                        <h5>Priya</h5>
+                                        <h6>Customer Integration Representative</h6>
+                                    </div>
+                                    <img alt="img" src="~/assets/img/index/svg/qotation.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Our Team -->
+        <div class="container">
+            <div class="work-duffl" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-3 d-flex align-items-center duffl-heading ps-0">
+                        <h1>Join</h1>
+                        <h2>Our</h2>
+                        <h1>Team</h1>
+                    </div>
+                    <div class="col-lg-7 d-flex align-items-center">
+                        <p class="m-0">Join us at Duffl Digital and experience the difference a dedicated, skilled, and passionate team can make in transforming your digital presence. Let's create something amazing together.</p>
+                    </div>
+                    <div class="col-lg-2 d-flex align-items-center">
+                        <a href="careers.html">
+                            <button>View Careers <span><img alt="img" src="~/assets/img/index/svg/yellow-top.svg" class="ms-2 arrow-animation"></span></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- bg-color end -->
+
+    <!-- footer -->
+    <footer data-aos="fade-up">
+        <div class="container">
+            <h1 class="text-center position-relative">
+                <img alt="img" src="~/assets/img/footer/Group.svg">
+            </h1>
+            <div class="menu-set-footer">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                        <div class="four-menu four-menu-line">
+                            <a href="service.html"><h6>Services</h6></a>
+                            <a href="case-studies.html"><h6>Case studies</h6></a>
+                            <a href="portfolio-website.html"><h6>Portfolio</h6></a>
+                            <a href="careers.html"><h6>Careers</h6></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-2">
+                        <div class="icon">
+                            <a href="https://www.instagram.com/duffldigital?igsh=MXQwcjZqdnFyNjhlMA==" target="_blank">
+                                <img alt="img" src="~/assets/img/footer/insta.svg">
+                            </a>
+                            <a href="https://www.linkedin.com/company/duffldigital/" target="_blank">
+                                <img alt="img" src="~/assets/img/footer/indeed.svg">
+                            </a>
+                            <a href="https://www.facebook.com/duffldigital" target="_blank">
+                                <img alt="img" src="~/assets/img/footer/fb.svg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                        <div class="four-menu">
+                            <a href="testimonial.html"><h6>Testimonial</h6></a>
+                            <a href="team.html"><h6>Team</h6></a>
+                            <a href="blog.html"><h6>Blog</h6></a>
+                            <a href="Contact.html"><h6>Contact Us</h6></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-center">
+                <a href="index.html">
+                    <img alt="img" src="~/assets/img/footer/top-arrow.svg" class="rotate-360-clockwise">
+                </a>
+            </h3>
+        </div>
+    </footer>
+
+    <!-- footer bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 text-lg-start text-center py-lg-2 pt-2">
+                    <p class="mb-0">&copy; @DateTime.Now.Year Duffl Digital Private Limited</p>
+                </div>
+                <div class="col-lg-4 text-center py-lg-2 py-2" style="color:#E2E2E2;">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#myModal">Disclaimer</a> |
+                    <a href="" data-bs-toggle="modal" data-bs-target="#Privacy">Privacy Policy</a>
+                </div>
+                <div class="col-lg-4 text-lg-end text-center py-lg-2 pb-2">
+                    <a>Of Course DUFFL DIGITAL</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Disclaimer</h4>
+                        <button type="button" class="btn-closee" data-bs-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias nulla perspiciatis ratione provident. Totam quas laudantium suscipit molestias praesentium, exercitationem earum recusandae necessitatibus quod, labore autem fugiat amet fuga vero.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, obcaecati doloremque? Dolore id quod quasi quaerat eos asperiores quam. Voluptates debitis odit at minima voluptatibus mollitia, labore ducimus nobis cupiditate.
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Policy Modal -->
+        <div class="modal" id="Privacy">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Privacy Policy</h4>
+                        <button type="button" class="btn-closee" data-bs-dismiss="modal">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <p>We are dedicated to preserving your personal data and respecting your right to privacy.</p>
+                            <h2><b style="font-size:18px;">We may collect personal information:</b></h2>
+                            <p class="mb-0">Contact: your name, email address, phone number, and postal address</p>
+                            <p class="mb-0">Usage: website and services, such as IP addresses, device information, browser type Accounts</p>
+                            <br>
+                            <h2><b style="font-size:18px;">Sharing Your Information</b></h2>
+                            <p class="mb-0">Your personal information is never distributed to outside parties by us. Your information is private and secure with us at all times.</p>
+                            <br>
+                            <h2><b style="font-size:18px;">Get in touch with us</b></h2>
+                            <p class="mb-0">
+                                Please get in touch with us at if you have any queries -
+                                <a href="mailto:reachout@duffldigital.com" style="color:#f76200;">
+                                    reachout@duffldigital.com
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer bottom -->
+
+    <!-- scripts -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/aos.js"></script>
+    <script src="~/assets/js/jquery.fancybox.min.js"></script>
+    <script src="~/assets/js/bootstrap-bundle.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/new-header.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/swiper.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/slick.min.js"></script>
+
+    <script>
+        $('#tags').slick({
+            slidesToShow: 4,
+            variableWidth: true,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 0,
+            speed: 8000,
+            pauseOnHover: false,
+            cssEase: 'linear',
+            arrows: false
+        });
+
+        $('#gallery').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 0,
+            speed: 8000,
+            pauseOnHover: true,
+            focusOnSelect: true,
+            cssEase: 'linear',
+            arrows: false,
+            responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+                { breakpoint: 768,  settings: { slidesToShow: 3, slidesToScroll: 1 } },
+                { breakpoint: 480,  settings: { slidesToShow: 2, slidesToScroll: 1 } }
+            ]
+        });
+
+        $('#gallery-two').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 0,
+            speed: 8000,
+            pauseOnHover: false,
+            cssEase: 'linear',
+            arrows: false,
+            responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+                { breakpoint: 768,  settings: { slidesToShow: 2, slidesToScroll: 1 } },
+                { breakpoint: 480,  settings: { slidesToShow: 2, slidesToScroll: 1 } }
+            ]
+        });
+    </script>
+
+    <script>
+        var swiper = new Swiper('.multiSlider', {
+            slidesPerView: 3,
+            slidesPerColumn: 2,
+            spaceBetween: 20,
+            slidesPerGroup: 6,
+            speed: 6000,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            autoplay: { delay: 0, disableOnInteraction: false },
+            breakpoints: {
+                640:  { slidesPerView: 2, slidesPerColumn: 2, spaceBetween: 20, slidesPerGroup: 2 },
+                860:  { slidesPerView: 3, slidesPerColumn: 2, spaceBetween: 20, slidesPerGroup: 3 },
+                992:  { slidesPerView: 4, slidesPerColumn: 2, spaceBetween: 20, slidesPerGroup: 4 },
+                1366: { slidesPerView: 2, slidesPerColumn: 2, spaceBetween: 20, slidesPerGroup: 5 }
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function printNumbers(callback) {
+                var delay = 150;
+                var count = 0;
+                function update() {
+                    if (count <= 100) {
+                        $('#box').css('width', count + '%');
+                        if (count <= 33) {
+                            $('#sec1').show(); $('#sec2').hide(); $('#sec3').hide();
+                        } else if (count <= 66) {
+                            $('#sec1').hide(); $('#sec2').show(); $('#sec3').hide();
+                        } else {
+                            $('#sec1').hide(); $('#sec2').hide(); $('#sec3').show();
+                        }
+                        count++;
+                        setTimeout(update, delay);
+                    } else {
+                        if (callback) callback();
+                    }
+                }
+                update();
+            }
+            function startPrinting() {
+                printNumbers(function () { startPrinting(); });
+            }
+            startPrinting();
+        });
+    </script>
+
+    <script>
+        var swiper = new Swiper('.serviceSlides', {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            slidesPerGroup: 3,
+            speed: 3000,
+            loop: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            autoplay: { delay: 6000, disableOnInteraction: false },
+            breakpoints: {
+                640: { slidesPerView: 1, slidesPerGroup: 1 },
+                768: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 40 },
+                1024: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 50 }
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            let $wrap = $(".wrap");
+            $wrap.find('div').first().addClass('highlight-border');
+            $wrap.on("click", "div", function () {
+                let $divs = $wrap.find('div');
+                let $firstDiv = $divs.first();
+                if ($(this).is($firstDiv)) return;
+                $firstDiv.removeClass('highlight-border').appendTo($wrap);
+                $(this).addClass('highlight-border').prependTo($wrap);
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var initialHash = window.location.hash;
+            if (initialHash) { $(initialHash).show(); }
+            else { $('.service-section').first().show(); }
+
+            $('.slider a').on('click', function (e) {
+                e.preventDefault();
+                var targetId = $(this).attr('href');
+                $('.service-section').hide();
+                $(targetId).show();
+                window.location.hash = targetId;
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelector('.starting-line').addEventListener('click', function (event) {
+            event.preventDefault();
+        });
+    </script>
+
+    <script>
+        $(".category-button").click(function () {
+            $(".category-button").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        var $categoryButton = $(".category-button");
+        var $pageContent = $(".page-content");
+
+        $(".page-content").hide().first().show();
+
+        $categoryButton.on("click", function (e) {
+            var $category = $(this).data("target");
+            $pageContent.hide().find('img').hide()
+                .end().filter("." + $category).show().find('img').fadeIn();
+        });
+    </script>
+
+</body>
+</html>

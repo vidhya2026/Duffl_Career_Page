@@ -1,0 +1,36 @@
+.sticky-section {
+    position: fixed;
+    z-index: 8;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sticky-section .enquire-btn {
+    font-family: 'Navigo Medium';
+    background-color: #11A0DB;
+    color: #fff;
+    font-size: 15.966px;
+    font-style: normal;
+    line-height: 150%;
+    letter-spacing: 1.341px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 4px;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    cursor: pointer;
+    width: max-content;
+    padding: 7px 9px;
+}
+
+
+.sticky-section a {
+    width: 37px;
+}
+
+.sticky-section .enquire-btn:hover {
+    background-color: #7ec7d1;
+    transition: all 0.5s ease;
+}

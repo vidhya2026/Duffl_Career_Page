@@ -1,0 +1,72 @@
+.btn-close:focus {
+    outline: 0;
+    box-shadow: none;
+
+    }
+
+.modal-header {   border-bottom:1px solid  transparent;    padding-bottom: 0px;}
+.form-enguire p span{font-size: 11.7px;}
+.form-enguire p {
+	color: #FFF;
+font-family: 'Navigo Thin';
+font-size: 12px;
+font-style: italic; 
+line-height: 170%; /* 18.7px */
+}
+.form-enguire h4{
+	color: #E46C50;
+font-family: 'Navigo Medium';
+font-size: 25px; 
+line-height: normal;
+}
+.btn-close {
+    --bs-btn-close-color: #000;
+    --bs-btn-close-bg: none;}
+
+.modal-content{border-radius: 12px;
+border: 1px solid rgba(255, 255, 255, 0.06);
+background: linear-gradient(180deg, rgba(8, 20, 31, 1) 0%, rgba(14, 21, 104, 1) 194.09%);
+ }
+ 
+.err-msg{
+	    color: #fc7373;
+    font-size: 11.75px;
+    font-family: 'Navigo Regular';display: none;
+}
+.form-b-only{
+	    background: transparent;
+    border: none;border-radius: 0px;
+border-bottom: 1px solid #fff;
+color: #FFF !important;    padding-top: 0px;padding-bottom:2px;
+font-family: 'Navigo Light';
+font-size: 16px; 
+line-height: normal;
+}
+.btn-submit-a:hover{  color: #E46C50; background: #000;box-shadow: 0 0 3px 1px #E46C50;}
+.btn-submit-a{
+	    color: #000;
+    font-family: 'Navigo Medium'; transition: all 0.5s ease;
+    font-size: 17px;
+    border-radius: 5px;
+    background: #E46C50;
+    padding: 11px 20px 8px;
+    line-height: normal;
+    text-transform: uppercase;
+    position: relative;
+    bottom: -29px;
+}
+.form-txt-c{
+	color: #FFF;
+font-family: 'Navigo Light';
+font-size: 16px; 
+line-height: normal;margin-bottom:0px;
+}
+/*.form-check-input{font-size: 15px;}*/
+.form-check-input:focus{box-shadow: none;border-color: transparent;}
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: transparent;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: none;
+}
