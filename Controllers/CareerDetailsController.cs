@@ -95,7 +95,7 @@ namespace Duffl_career.Controllers
 
                 if (!Array.Exists(allowed, e => e == ext))
                     ModelState.AddModelError("CvFile",
-                        "Only .pdf, .doc, .docx files are allowed.");a
+                        "Only .pdf, .doc, .docx files are allowed.");
 
                 if (CvFile.Length > 5 * 1024 * 1024)
                     ModelState.AddModelError("CvFile",
