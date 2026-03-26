@@ -16,7 +16,8 @@ namespace Duffl_career.Controllers
         // Paste your ngrok URL here after running Colab
         // Example: "https://abc123.ngrok.io"
         // -------------------------------------------------------
-        private readonly string _flaskApiUrl = "https://cf70-34-53-43-129.ngrok-free.app";
+        private readonly string _flaskApiUrl = "https://nonappreciative-candi-unlitigated.ngrok-free.dev";
+
 
         // GET: /ResumeMatcher/Index
         // Loads the HR upload form
@@ -105,7 +106,7 @@ namespace Duffl_career.Controllers
                 return RedirectToAction("Index");
             }
 
-            var apiResult = JsonSerializer.Deserialize<MatchApiResponse>(
+            var apiResult = JsonSerializer.Deserialize<MatchResultViewModel>(
                 json,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
             );

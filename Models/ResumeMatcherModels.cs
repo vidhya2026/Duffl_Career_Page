@@ -2,21 +2,22 @@
 
 namespace Duffl_career.Models
 {
-    public class MatchApiResponse
+    public class MatchResultViewModel
     {
-        public List<ResumeResult> Results { get; set; } = new();
-        public MatchSummary Summary { get; set; } = new();
+        public List<CandidateResult> Results { get; set; }
+        public int ThresholdUsed { get; set; }
+        public SummaryModel Summary { get; set; }
     }
-
-    public class ResumeResult
+    public class CandidateResult
     {
-        public string File { get; set; } = "";
+        public string File { get; set; }
+        public string CandidateName { get; set; }
+        public string Experience { get; set; }
         public double Score { get; set; }
-        public string Status { get; set; } = "";
-        public string Issues { get; set; } = "";
+        public string Status { get; set; }  // "Matched" or "Not Matched"
+        public string Issues { get; set; }
     }
-
-    public class MatchSummary
+    public class SummaryModel
     {
         public int Total { get; set; }
         public int Matched { get; set; }

@@ -1,74 +1,758 @@
 ﻿@{
-    ViewData["Title"] = "Resume Screening";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Resume Matcher";
 }
 
-<div class="container mt-5">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resume Matcher — HR Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <div class="mb-4">
-        <h2>Resume Screening Tool</h2>
-        <p class="text-muted">Enter the job description and upload candidate resumes.</p>
-    </div>
+        :root {
+            --ink:        #0d1117;
+            --ink-soft:   #4a5568;
+            --ink-muted:  #8a96a8;
+            --surface:    #ffffff;
+            --surface-2:  #f7f8fa;
+            --surface-3:  #eef0f4;
+            --border:     #e2e6ed;
+            --accent:     #1a56db;
+            --accent-soft:#e8effe;
+            --accent-dark:#1140a6;
+            --success:    #0e9f6e;
+            --warning:    #c27803;
+            --radius:     12px;
+            --radius-lg:  20px;
+            --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+            --shadow-md:  0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+            --shadow-lg:  0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.05);
+        }
 
-    @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-danger">
-            @ViewBag.Error
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface-2);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        /* ── Top bar ───────────────────────────── */
+        .topbar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .topbar-icon {
+            width: 34px; height: 34px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .topbar-icon svg { width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2; }
+        .topbar-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -.01em;
+            color: var(--ink);
+        }
+        .topbar-name span { color: var(--accent); }
+        .topbar-badge {
+            font-size: .7rem;
+            font-weight: 500;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: .02em;
+        }
+
+        /* ── Page layout ───────────────────────── */
+        .page-wrap {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 52px 24px 80px;
+        }
+
+        .page-hero {
+            margin-bottom: 40px;
+            animation: fadeUp .5s ease both;
+        }
+        .page-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+        .page-hero h1 span { color: var(--accent); }
+        .page-hero p {
+            color: var(--ink-soft);
+            font-size: .97rem;
+            font-weight: 300;
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        /* ── Step indicator ────────────────────── */
+        .steps {
+            display: flex;
+            gap: 0;
+            margin-bottom: 36px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            animation: fadeUp .5s .1s ease both;
+        }
+        .step {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            position: relative;
+        }
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 50%;
+            transform: translateY(-50%);
+            width: 1px; height: 50%;
+            background: var(--border);
+        }
+        .step.active .step-num {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .step-num {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--ink-muted);
+            flex-shrink: 0;
+            transition: all .2s;
+        }
+        .step-label { font-size: .85rem; font-weight: 500; color: var(--ink-soft); }
+        .step.active .step-label { color: var(--ink); font-weight: 600; }
+
+        /* ── Card ──────────────────────────────── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-md);
+            animation: fadeUp .5s ease both;
+        }
+        .card:nth-child(2) { animation-delay: .1s; }
+        .card:nth-child(3) { animation-delay: .2s; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--surface-3);
+        }
+        .card-icon {
+            width: 38px; height: 38px;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .card-icon svg { width:18px; height:18px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .card-subtitle { font-size: .82rem; color: var(--ink-muted); margin-top: 2px; }
+
+        /* ── Form elements ─────────────────────── */
+        label.field-label {
+            display: block;
+            font-size: .82rem;
+            font-weight: 500;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+            letter-spacing: .01em;
+            text-transform: uppercase;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-2);
+            font-family: 'DM Sans', sans-serif;
+            font-size: .93rem;
+            color: var(--ink);
+            resize: vertical;
+            line-height: 1.6;
+            transition: border-color .2s, box-shadow .2s;
+            outline: none;
+        }
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+            background: var(--surface);
+        }
+        textarea::placeholder { color: var(--ink-muted); }
+
+        /* ── Threshold slider ──────────────────── */
+        .threshold-wrap {
+            margin-top: 4px;
+        }
+        .threshold-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .threshold-val {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .threshold-hint { font-size: .8rem; color: var(--ink-muted); text-align: right; }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: var(--surface-3);
+            border-radius: 99px;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(26,86,219,.35);
+            transition: transform .15s, box-shadow .15s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 14px rgba(26,86,219,.45);
+        }
+
+        .threshold-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: .75rem;
+            color: var(--ink-muted);
+        }
+
+        .threshold-chips {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .chip {
+            padding: 5px 14px;
+            border-radius: 99px;
+            border: 1.5px solid var(--border);
+            font-size: .78rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--ink-soft);
+            background: var(--surface-2);
+            transition: all .15s;
+        }
+        .chip:hover, .chip.active {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── File upload ───────────────────────── */
+        .dropzone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-2);
+            padding: 36px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+        }
+        .dropzone:hover, .dropzone.dragging {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .dropzone input[type="file"] {
+            position: absolute; inset: 0;
+            opacity: 0; cursor: pointer;
+            width: 100%; height: 100%;
+        }
+        .dropzone-icon {
+            width: 48px; height: 48px;
+            background: var(--surface-3);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 14px;
+            transition: background .2s;
+        }
+        .dropzone:hover .dropzone-icon { background: #dce7fd; }
+        .dropzone-icon svg { width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+        .dropzone-title { font-weight: 600; color: var(--ink); font-size: .95rem; margin-bottom: 4px; }
+        .dropzone-sub { font-size: .82rem; color: var(--ink-muted); }
+        .dropzone-sub strong { color: var(--accent); }
+
+        /* file list */
+        #file-list { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .file-item {
+            display: flex; align-items: center; gap: 10px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 10px 14px;
+            animation: fadeUp .25s ease both;
+        }
+        .file-item-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+        }
+        .file-item-icon.pdf { background: #fee2e2; color: #dc2626; }
+        .file-item-icon.docx { background: #dbeafe; color: #1d4ed8; }
+        .file-item-icon.txt  { background: #dcfce7; color: #16a34a; }
+        .file-item-name { font-size: .88rem; font-weight: 500; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .file-item-size { font-size: .78rem; color: var(--ink-muted); flex-shrink: 0; }
+        .file-item-del {
+            width: 22px; height: 22px;
+            border-radius: 50%; border: none;
+            background: var(--surface-3);
+            color: var(--ink-muted);
+            cursor: pointer; font-size: .85rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .15s, color .15s;
+            flex-shrink: 0;
+        }
+        .file-item-del:hover { background: #fee2e2; color: #dc2626; }
+
+        /* ── Submit ────────────────────────────── */
+        .submit-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .submit-note {
+            font-size: .82rem;
+            color: var(--ink-muted);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .submit-note svg { width:14px; height:14px; stroke:var(--ink-muted); fill:none; stroke-width:2; }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: var(--radius);
+            font-family: 'Syne', sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(26,86,219,.3);
+            transition: background .2s, transform .15s, box-shadow .2s;
+        }
+        .btn-submit:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 22px rgba(26,86,219,.38);
+        }
+        .btn-submit:active { transform: translateY(0); }
+        .btn-submit svg { width:18px; height:18px; stroke:#fff; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+
+        /* loading overlay */
+        #loading-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(255,255,255,.85);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        #loading-overlay.show { display: flex; }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 4px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+        }
+        .loading-text { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+        .loading-sub  { font-size: .85rem; color: var(--ink-muted); }
+
+        /* ── Animations ────────────────────────── */
+        @@keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @@keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Validation ────────────────────────── */
+        .error-msg {
+            display: none;
+            font-size: .8rem;
+            color: #dc2626;
+            margin-top: 6px;
+        }
+        .error-msg.show { display: block; }
+        .field-error textarea, .field-error .dropzone { border-color: #dc2626 !important; }
+
+        @@media (max-width: 600px) {
+            .topbar { padding: 0 20px; }
+            .page-wrap { padding: 32px 16px 60px; }
+            .card { padding: 22px; }
+            .steps { flex-direction: column; }
+            .step:not(:last-child)::after { display: none; }
+            .page-hero h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Top bar ───────────────────────────────────── -->
+<header class="topbar">
+    <div class="topbar-brand">
+        <div class="topbar-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
         </div>
-    }
-
-    <div class="card shadow-sm">
-        <div class="card-body p-4">
-
-            <form method="post" action="/ResumeMatcher/Match" enctype="multipart/form-data">
-
-                @Html.AntiForgeryToken()
-
-                <div class="mb-4">
-                    <label class="form-label fw-semibold">
-                        Job Description <span class="text-danger">*</span>
-                    </label>
-                    <textarea name="jobDescription"
-                              class="form-control"
-                              rows="8"
-                              placeholder="Paste the full job description here..."
-                              required></textarea>
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label fw-semibold">
-                        Upload Resumes <span class="text-danger">*</span>
-                    </label>
-                    <input type="file"
-                           name="resumes"
-                           class="form-control"
-                           accept=".pdf,.docx,.txt"
-                           multiple
-                           required />
-                    <div class="form-text mt-1">
-                        Accepted formats: PDF, DOCX, TXT &nbsp;&bull;&nbsp; Maximum 10 files
-                    </div>
-                </div>
-
-                <div class="d-flex align-items-center gap-3">
-                    <button type="submit" class="btn btn-primary px-4 py-2" id="submitBtn">
-                        Analyse Resumes
-                    </button>
-                    <span class="text-muted small" id="loadingText" style="display:none;">
-                        Please wait, BERT model is analysing resumes...
-                    </span>
-                </div>
-
-            </form>
-        </div>
+        <span class="topbar-name">Resume<span>Match</span></span>
     </div>
+    <span class="topbar-badge">HR Portal</span>
+</header>
+
+<!-- ── Loading overlay ──────────────────────────── -->
+<div id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Analysing Resumes…</div>
+    <div class="loading-sub">BERT model is computing semantic similarity scores</div>
 </div>
 
-@section Scripts {
-    <script>
-        document.querySelector('form').addEventListener('submit', function () {
-            document.getElementById('loadingText').style.display = 'inline';
-            document.getElementById('submitBtn').disabled = true;
+<!-- ── Main content ─────────────────────────────── -->
+<main class="page-wrap">
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <h1>Find Your <span>Best Candidates</span><br>Intelligently.</h1>
+        <p>Paste a job description, set a match threshold, upload resumes — our BERT-powered engine does the rest.</p>
+    </div>
+
+    <!-- Step indicator -->
+    <div class="steps">
+        <div class="step active">
+            <div class="step-num">1</div>
+            <div>
+                <div class="step-label">Job Description</div>
+            </div>
+        </div>
+        <div class="step active">
+            <div class="step-num">2</div>
+            <div>
+                <div class="step-label">Match Threshold</div>
+            </div>
+        </div>
+        <div class="step active">
+            <div class="step-num">3</div>
+            <div>
+                <div class="step-label">Upload Resumes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form id="matchForm" asp-action="Match" asp-controller="Resume" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <!-- Card 1: JD -->
+        <div class="card" style="animation-delay:.1s">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                </div>
+                <div>
+                    <div class="card-title">Job Description</div>
+                    <div class="card-subtitle">Paste the complete JD — the more detail, the better the match accuracy</div>
+                </div>
+            </div>
+
+            <div id="jd-field">
+                <label class="field-label" for="jd">Job Description Text</label>
+                <textarea id="jd" name="jd"
+                    placeholder="We are looking for a Senior Python Developer with 4+ years of experience in machine learning, deep learning, NLP, TensorFlow, REST APIs, Docker, and AWS. The candidate should have strong communication skills and experience with SQL databases…"></textarea>
+                <div class="error-msg" id="jd-error">Please paste the job description before continuing.</div>
+            </div>
+        </div>
+
+        <!-- Card 2: Threshold -->
+        <div class="card" style="animation-delay:.18s">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                </div>
+                <div>
+                    <div class="card-title">Match Threshold</div>
+                    <div class="card-subtitle">Minimum BERT similarity score a resume must reach to be marked as Matched</div>
+                </div>
+            </div>
+
+            <div class="threshold-wrap">
+                <div class="threshold-row">
+                    <div>
+                        <label class="field-label" for="threshold">Threshold Value</label>
+                        <div class="threshold-val" id="threshold-display">50%</div>
+                    </div>
+                    <div class="threshold-hint" id="threshold-hint">Good general starting point</div>
+                </div>
+
+                <input type="range" id="threshold" name="threshold"
+                       min="10" max="90" step="5" value="50"
+                       oninput="updateThreshold(this.value)" />
+
+                <div class="threshold-labels">
+                    <span>10% — Very lenient</span>
+                    <span>50% — Balanced</span>
+                    <span>90% — Very strict</span>
+                </div>
+
+                <div class="threshold-chips">
+                    <span class="chip" onclick="setThreshold(30)">30% — Broad search</span>
+                    <span class="chip active" onclick="setThreshold(50)">50% — Recommended</span>
+                    <span class="chip" onclick="setThreshold(65)">65% — Stricter</span>
+                    <span class="chip" onclick="setThreshold(80)">80% — Highly specific</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Resumes -->
+        <div class="card" style="animation-delay:.26s">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <div>
+                    <div class="card-title">Upload Resumes</div>
+                    <div class="card-subtitle">PDF, DOCX, or TXT — select multiple files at once</div>
+                </div>
+            </div>
+
+            <div id="upload-field">
+                <div class="dropzone" id="dropzone">
+                    <input type="file" id="resumeInput" name="resumes" multiple
+                           accept=".pdf,.doc,.docx,.txt"
+                           onchange="handleFiles(this.files)" />
+                    <div class="dropzone-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    </div>
+                    <div class="dropzone-title">Drag & drop resumes here</div>
+                    <div class="dropzone-sub">or <strong>browse files</strong> — PDF, DOCX, TXT supported</div>
+                </div>
+                <div class="error-msg" id="file-error">Please upload at least one resume file.</div>
+                <div id="file-list"></div>
+            </div>
+        </div>
+
+        <!-- Submit row -->
+        <div class="submit-row">
+            <div class="submit-note">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Processing time depends on the number of resumes
+            </div>
+            <button type="submit" class="btn-submit" onclick="return validateForm()">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Run Matching
+            </button>
+        </div>
+
+    </form>
+</main>
+
+<script>
+    /* ── Threshold slider ────────────────────── */
+    const hints = {
+        10:'Very broad — almost all resumes will pass',
+        15:'Very broad — almost all resumes will pass',
+        20:'Lenient — good for entry-level roles',
+        25:'Lenient — good for entry-level roles',
+        30:'Broad search — catch wider talent pool',
+        35:'Slightly below average — wide net',
+        40:'Below average threshold',
+        45:'Slightly below recommended',
+        50:'Good general starting point',
+        55:'Slightly above average',
+        60:'Stricter — only relevant profiles pass',
+        65:'Stricter — only relevant profiles pass',
+        70:'High bar — strong skill overlap required',
+        75:'Very strict — near-identical skill sets',
+        80:'Very strict — near-identical skill sets',
+        85:'Extremely strict — almost exact matches only',
+        90:'Maximum strictness — perfect matches only',
+    };
+
+    function updateThreshold(val) {
+        document.getElementById('threshold-display').textContent = val + '%';
+        document.getElementById('threshold-hint').textContent = hints[parseInt(val)] || '';
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        // colour the slider fill
+        const pct = ((val - 10) / 80) * 100;
+        const slider = document.getElementById('threshold');
+        slider.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--surface-3) ${pct}%)`;
+    }
+
+    function setThreshold(val) {
+        const slider = document.getElementById('threshold');
+        slider.value = val;
+        updateThreshold(val);
+        document.querySelectorAll('.chip').forEach(c => {
+            c.classList.toggle('active', c.textContent.startsWith(val + '%'));
         });
-    </script>
-}
+    }
+
+    // init fill on load
+    updateThreshold(50);
+
+    /* ── File handling ───────────────────────── */
+    let selectedFiles = new DataTransfer();
+
+    function handleFiles(files) {
+        for (const f of files) selectedFiles.items.add(f);
+        document.getElementById('resumeInput').files = selectedFiles.files;
+        renderFileList();
+    }
+
+    function renderFileList() {
+        const list = document.getElementById('file-list');
+        list.innerHTML = '';
+        const files = selectedFiles.files;
+        if (!files.length) return;
+
+        for (let i = 0; i < files.length; i++) {
+            const f = files[i];
+            const ext = f.name.split('.').pop().toLowerCase();
+            const size = f.size > 1048576
+                ? (f.size/1048576).toFixed(1)+' MB'
+                : (f.size/1024).toFixed(0)+' KB';
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            item.innerHTML = `
+                <div class="file-item-icon ${ext}">${ext.toUpperCase()}</div>
+                <div class="file-item-name" title="${f.name}">${f.name}</div>
+                <div class="file-item-size">${size}</div>
+                <button type="button" class="file-item-del" onclick="removeFile(${i})" title="Remove">✕</button>
+            `;
+            list.appendChild(item);
+        }
+    }
+
+    function removeFile(index) {
+        const dt = new DataTransfer();
+        const files = selectedFiles.files;
+        for (let i = 0; i < files.length; i++) {
+            if (i !== index) dt.items.add(files[i]);
+        }
+        selectedFiles = dt;
+        document.getElementById('resumeInput').files = selectedFiles.files;
+        renderFileList();
+    }
+
+    /* ── Drag-and-drop ───────────────────────── */
+    const dz = document.getElementById('dropzone');
+    dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', ()  => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => {
+        e.preventDefault();
+        dz.classList.remove('dragging');
+        handleFiles(e.dataTransfer.files);
+    });
+
+    /* ── Validation & submit ─────────────────── */
+    function validateForm() {
+        let valid = true;
+
+        const jd = document.getElementById('jd').value.trim();
+        const jdErr = document.getElementById('jd-error');
+        const jdField = document.getElementById('jd-field');
+        if (jd.length < 30) {
+            jdErr.classList.add('show');
+            jdField.classList.add('field-error');
+            valid = false;
+        } else {
+            jdErr.classList.remove('show');
+            jdField.classList.remove('field-error');
+        }
+
+        const fileErr = document.getElementById('file-error');
+        const uploadField = document.getElementById('upload-field');
+        if (selectedFiles.files.length === 0) {
+            fileErr.classList.add('show');
+            uploadField.classList.add('field-error');
+            valid = false;
+        } else {
+            fileErr.classList.remove('show');
+            uploadField.classList.remove('field-error');
+        }
+
+        if (valid) {
+            document.getElementById('loading-overlay').classList.add('show');
+        }
+        return valid;
+    }
+</script>
+</body>
+</html>

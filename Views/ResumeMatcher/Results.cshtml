@@ -1,110 +1,603 @@
-﻿@model Duffl_career.Models.MatchApiResponse
-
+﻿@model Duffl_career.Models.MatchResultViewModel
 @{
-    ViewData["Title"] = "Screening Results";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Match Results";
+    var matched    = Model.Results.Where(r => r.Status == "Matched").ToList();
+    var notMatched = Model.Results.Where(r => r.Status == "Not Matched").ToList();
+    var topScore   = Model.Results.Any() ? Model.Results.Max(r => r.Score) : 0;
+    var avgScore   = Model.Results.Any() ? Model.Results.Average(r => r.Score) : 0;
 }
 
-<div class="container mt-5">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Match Results — Resume Matcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <div class="mb-4">
-        <h2>Screening Results</h2>
-        <p class="text-muted">Resumes are ranked by match score, highest first.</p>
+        :root {
+            --ink:          #0d1117;
+            --ink-soft:     #4a5568;
+            --ink-muted:    #8a96a8;
+            --surface:      #ffffff;
+            --surface-2:    #f7f8fa;
+            --surface-3:    #eef0f4;
+            --border:       #e2e6ed;
+            --accent:       #1a56db;
+            --accent-soft:  #e8effe;
+            --accent-dark:  #1140a6;
+            --success:      #0e9f6e;
+            --success-soft: #d1fae5;
+            --danger:       #dc2626;
+            --danger-soft:  #fee2e2;
+            --warning:      #d97706;
+            --warning-soft: #fef3c7;
+            --radius:       12px;
+            --radius-lg:    20px;
+            --shadow-sm:    0 1px 3px rgba(0,0,0,.06);
+            --shadow-md:    0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+            --shadow-lg:    0 12px 40px rgba(0,0,0,.10);
+        }
+
+        html { -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface-2);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        /* ── Topbar ──────────────────────────────── */
+        .topbar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        .topbar-brand { display: flex; align-items: center; gap: 10px; }
+        .topbar-icon {
+            width: 34px; height: 34px;
+            background: var(--accent); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .topbar-icon svg { width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2; }
+        .topbar-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink); }
+        .topbar-name span { color: var(--accent); }
+
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: var(--surface-2); border: 1.5px solid var(--border);
+            color: var(--ink-soft); padding: 8px 18px;
+            border-radius: var(--radius); font-family: 'DM Sans', sans-serif;
+            font-size: .85rem; font-weight: 500; cursor: pointer; text-decoration: none;
+            transition: all .15s;
+        }
+        .btn-back:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+        .btn-back svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+        /* ── Layout ──────────────────────────────── */
+        .page-wrap { max-width: 1040px; margin: 0 auto; padding: 48px 24px 80px; }
+
+        /* ── Page hero ───────────────────────────── */
+        .page-hero {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            margin-bottom: 36px; flex-wrap: wrap; gap: 20px;
+            animation: fadeUp .4s ease both;
+        }
+        .page-hero h1 {
+            font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800;
+            letter-spacing: -.03em; line-height: 1.2;
+        }
+        .page-hero h1 span { color: var(--accent); }
+        .page-hero-sub { font-size: .9rem; color: var(--ink-soft); margin-top: 6px; font-weight: 300; }
+
+        /* ── Summary stat cards ──────────────────── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
+            animation: fadeUp .4s .08s ease both;
+        }
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 22px 20px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        .stat-card.total::before  { background: var(--accent); }
+        .stat-card.pass::before   { background: var(--success); }
+        .stat-card.fail::before   { background: var(--danger); }
+        .stat-card.score::before  { background: var(--warning); }
+
+        .stat-label { font-size: .75rem; font-weight: 500; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+        .stat-value { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; }
+        .stat-card.total .stat-value  { color: var(--accent); }
+        .stat-card.pass  .stat-value  { color: var(--success); }
+        .stat-card.fail  .stat-value  { color: var(--danger); }
+        .stat-card.score .stat-value  { color: var(--warning); }
+        .stat-sub { font-size: .78rem; color: var(--ink-muted); margin-top: 4px; }
+
+        /* ── Section header ──────────────────────── */
+        .section-header {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 18px; margin-top: 8px;
+        }
+        .section-header h2 {
+            font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+        }
+        .section-badge {
+            padding: 3px 11px; border-radius: 99px; font-size: .75rem; font-weight: 600;
+        }
+        .section-badge.green { background: var(--success-soft); color: var(--success); }
+        .section-badge.red   { background: var(--danger-soft);  color: var(--danger); }
+
+        /* ── Candidate cards ─────────────────────── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin-bottom: 40px;
+        }
+
+        .cand-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: transform .2s, box-shadow .2s;
+            animation: fadeUp .4s ease both;
+        }
+        .cand-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .cand-card.matched  { border-top: 3px solid var(--success); }
+        .cand-card.unmatched { border-top: 3px solid var(--danger); }
+
+        /* rank badge */
+        .rank-badge {
+            position: absolute; top: 18px; right: 18px;
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif; font-size: .72rem; font-weight: 800;
+        }
+        .rank-badge.gold   { background: #fef3c7; color: #92400e; }
+        .rank-badge.silver { background: #f1f5f9; color: #475569; }
+        .rank-badge.bronze { background: #fdf4e7; color: #9a3412; }
+        .rank-badge.other  { background: var(--surface-3); color: var(--ink-muted); }
+
+        /* avatar */
+        .cand-avatar {
+            width: 46px; height: 46px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800;
+            margin-bottom: 14px; flex-shrink: 0;
+        }
+        .matched   .cand-avatar { background: var(--success-soft); color: var(--success); }
+        .unmatched .cand-avatar { background: var(--danger-soft);  color: var(--danger); }
+
+        .cand-name {
+            font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+            color: var(--ink); margin-bottom: 2px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            padding-right: 36px;
+        }
+        .cand-file {
+            font-size: .78rem; color: var(--ink-muted); margin-bottom: 16px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* meta row */
+        .cand-meta {
+            display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
+        }
+        .meta-pill {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: var(--surface-2); border: 1px solid var(--border);
+            border-radius: 99px; padding: 4px 11px;
+            font-size: .78rem; color: var(--ink-soft);
+        }
+        .meta-pill svg { width:12px; height:12px; stroke:var(--ink-muted); fill:none; stroke-width:2; stroke-linecap:round; flex-shrink:0; }
+
+        /* score bar */
+        .score-section { margin-bottom: 16px; }
+        .score-row {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 7px;
+        }
+        .score-label { font-size: .78rem; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+        .score-num {
+            font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800;
+        }
+        .matched   .score-num { color: var(--success); }
+        .unmatched .score-num { color: var(--danger); }
+
+        .score-bar-bg {
+            height: 7px; background: var(--surface-3); border-radius: 99px; overflow: hidden;
+        }
+        .score-bar-fill {
+            height: 100%; border-radius: 99px;
+            transition: width 1s cubic-bezier(.4,0,.2,1);
+        }
+        .matched   .score-bar-fill { background: linear-gradient(90deg, var(--success), #34d399); }
+        .unmatched .score-bar-fill { background: linear-gradient(90deg, var(--danger), #f87171); }
+
+        /* status chip */
+        .status-chip {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 13px; border-radius: 99px;
+            font-size: .78rem; font-weight: 600;
+        }
+        .status-chip.matched-chip   { background: var(--success-soft); color: var(--success); }
+        .status-chip.unmatched-chip { background: var(--danger-soft);  color: var(--danger); }
+        .status-dot {
+            width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+        }
+        .matched-chip   .status-dot { background: var(--success); }
+        .unmatched-chip .status-dot { background: var(--danger); }
+
+        /* issues */
+        .issues-box {
+            margin-top: 14px;
+            padding: 10px 13px;
+            background: #fff8f8;
+            border: 1px solid #fecaca;
+            border-radius: var(--radius);
+            font-size: .78rem;
+            color: var(--danger);
+            line-height: 1.5;
+        }
+        .issues-label {
+            font-weight: 600; font-size: .72rem;
+            text-transform: uppercase; letter-spacing: .05em;
+            margin-bottom: 3px; color: #b91c1c;
+        }
+
+        /* card footer */
+        .cand-footer {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-top: 16px; padding-top: 14px;
+            border-top: 1px solid var(--surface-3);
+        }
+        .threshold-info { font-size: .75rem; color: var(--ink-muted); }
+        .threshold-info strong { color: var(--ink-soft); }
+
+        /* ── Filter tabs ─────────────────────────── */
+        .filter-tabs {
+            display: flex; gap: 6px; flex-wrap: wrap;
+            margin-bottom: 24px;
+            animation: fadeUp .4s .15s ease both;
+        }
+        .tab-btn {
+            padding: 7px 18px; border-radius: 99px;
+            border: 1.5px solid var(--border);
+            background: var(--surface); font-family: 'DM Sans', sans-serif;
+            font-size: .83rem; font-weight: 500; cursor: pointer;
+            color: var(--ink-soft); transition: all .15s;
+        }
+        .tab-btn:hover  { border-color: var(--accent); color: var(--accent); }
+        .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+        /* ── Download row ────────────────────────── */
+        .download-row {
+            display: flex; gap: 12px; flex-wrap: wrap;
+            margin-bottom: 36px;
+            animation: fadeUp .4s .2s ease both;
+        }
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 22px; border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif; font-size: .87rem; font-weight: 500;
+            cursor: pointer; text-decoration: none; transition: all .15s;
+            border: 1.5px solid transparent;
+        }
+        .btn-download svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+        .btn-dl-csv  { background: var(--surface); border-color: var(--border); color: var(--ink-soft); }
+        .btn-dl-csv:hover  { border-color: var(--success); color: var(--success); }
+        .btn-dl-xlsx { background: var(--surface); border-color: var(--border); color: var(--ink-soft); }
+        .btn-dl-xlsx:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ── Empty state ─────────────────────────── */
+        .empty-state {
+            text-align: center; padding: 56px 24px;
+            background: var(--surface); border: 1px dashed var(--border);
+            border-radius: var(--radius-lg);
+        }
+        .empty-state svg { width:48px; height:48px; stroke:var(--ink-muted); fill:none; stroke-width:1.5; margin-bottom:16px; }
+        .empty-state p { color: var(--ink-muted); font-size: .9rem; }
+
+        /* ── Threshold pill on header ────────────── */
+        .threshold-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--accent-soft); color: var(--accent);
+            padding: 5px 13px; border-radius: 99px; font-size: .8rem; font-weight: 600;
+        }
+
+        @@keyframes fadeUp {
+            from { opacity:0; transform:translateY(16px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        @@media (max-width:768px) {
+            .topbar { padding:0 20px; }
+            .page-wrap { padding:28px 16px 60px; }
+            .stats-row { grid-template-columns:repeat(2,1fr); }
+            .cards-grid { grid-template-columns:1fr; }
+            .page-hero { flex-direction:column; }
+        }
+        @@media (max-width:400px) {
+            .stats-row { grid-template-columns:1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<header class="topbar">
+    <div class="topbar-brand">
+        <div class="topbar-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span class="topbar-name">Resume<span>Match</span></span>
+    </div>
+    <a href="@Url.Action("Index","Resume")" class="btn-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        New Search
+    </a>
+</header>
+
+<main class="page-wrap">
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <div>
+            <h1>Match <span>Results</span></h1>
+            <p class="page-hero-sub">
+                @Model.Results.Count resume@(Model.Results.Count != 1 ? "s" : "") analysed
+                &nbsp;·&nbsp;
+                Threshold:
+                <span class="threshold-pill">@Model.ThresholdUsed%</span>
+            </p>
+        </div>
+        <!-- Download buttons -->
+        <div class="download-row" style="margin-bottom:0">
+            <a href="@Url.Action("DownloadCsv","Resume")" class="btn-download btn-dl-csv">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export CSV
+            </a>
+            <a href="@Url.Action("DownloadExcel","Resume")" class="btn-download btn-dl-xlsx">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export Excel
+            </a>
+        </div>
     </div>
 
-    <div class="row mb-4 g-3">
-        <div class="col-md-3">
-            <div class="card text-center h-100">
-                <div class="card-body">
-                    <h2 class="fw-bold">@Model.Summary.Total</h2>
-                    <p class="text-muted mb-0">Total Resumes</p>
-                </div>
-            </div>
+    <!-- Stat cards -->
+    <div class="stats-row">
+        <div class="stat-card total">
+            <div class="stat-label">Total Resumes</div>
+            <div class="stat-value">@Model.Summary.Total</div>
+            <div class="stat-sub">Files processed</div>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center border-success h-100">
-                <div class="card-body">
-                    <h2 class="fw-bold text-success">@Model.Summary.Matched</h2>
-                    <p class="text-muted mb-0">Matched</p>
-                </div>
-            </div>
+        <div class="stat-card pass">
+            <div class="stat-label">Matched</div>
+            <div class="stat-value">@Model.Summary.Matched</div>
+            <div class="stat-sub">Above @Model.ThresholdUsed% threshold</div>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center border-danger h-100">
-                <div class="card-body">
-                    <h2 class="fw-bold text-danger">@Model.Summary.NotMatched</h2>
-                    <p class="text-muted mb-0">Not Matched</p>
-                </div>
-            </div>
+        <div class="stat-card fail">
+            <div class="stat-label">Not Matched</div>
+            <div class="stat-value">@Model.Summary.NotMatched</div>
+            <div class="stat-sub">Below threshold</div>
+        </div>
+        <div class="stat-card score">
+            <div class="stat-label">Top Score</div>
+            <div class="stat-value">@topScore.ToString("F1")%</div>
+            <div class="stat-sub">Avg: @avgScore.ToString("F1")%</div>
         </div>
     </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <table class="table table-hover mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="ps-3">#</th>
-                        <th>Resume File</th>
-                        <th style="width:220px">Match Score</th>
-                        <th>Status</th>
-                        <th>Issues</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        int i = 1;
-                    }
-                    @foreach (var result in Model.Results)
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterCards('all', this)">All (@Model.Results.Count)</button>
+        <button class="tab-btn" onclick="filterCards('matched', this)">✅ Matched (@matched.Count)</button>
+        <button class="tab-btn" onclick="filterCards('unmatched', this)">❌ Not Matched (@notMatched.Count)</button>
+    </div>
+
+    <!-- ── MATCHED section ─────────────────────── -->
+    @if (matched.Any())
+    {
+        <div class="section-header" id="sec-matched">
+            <h2>Matched Candidates</h2>
+            <span class="section-badge green">@matched.Count passed</span>
+        </div>
+
+        <div class="cards-grid" id="grid-matched">
+            @for (int i = 0; i < matched.Count; i++)
+            {
+                var r = matched[i];
+                var initials = r.CandidateName != "Unknown"
+                    ? string.Concat(r.CandidateName.Split(' ').Take(2).Select(w => w[0].ToString().ToUpper()))
+                    : "?";
+                var rankClass = i == 0 ? "gold" : i == 1 ? "silver" : i == 2 ? "bronze" : "other";
+                var rankLabel = i == 0 ? "🥇" : i == 1 ? "🥈" : i == 2 ? "🥉" : $"#{i+1}";
+                <div class="cand-card matched" style="animation-delay:@(i * 0.07)s">
+                    <div class="rank-badge @rankClass">@rankLabel</div>
+
+                    <div class="cand-avatar">@initials</div>
+                    <div class="cand-name" title="@r.CandidateName">@r.CandidateName</div>
+                    <div class="cand-file" title="@r.File">@r.File</div>
+
+                    <div class="cand-meta">
+                        @if (r.Experience != "Not mentioned")
+                        {
+                            <span class="meta-pill">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                @r.Experience
+                            </span>
+                        }
+                        <span class="meta-pill">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                            @r.File.Split('.').Last().ToUpper()
+                        </span>
+                    </div>
+
+                    <div class="score-section">
+                        <div class="score-row">
+                            <span class="score-label">BERT Score</span>
+                            <span class="score-num">@r.Score.ToString("F1")%</span>
+                        </div>
+                        <div class="score-bar-bg">
+                            <div class="score-bar-fill" style="width:0%" data-width="@r.Score.ToString("F1")%"></div>
+                        </div>
+                    </div>
+
+                    <div class="cand-footer">
+                        <span class="status-chip matched-chip">
+                            <span class="status-dot"></span>
+                            Matched
+                        </span>
+                        <span class="threshold-info">Threshold: <strong>@Model.ThresholdUsed%</strong></span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- ── NOT MATCHED section ────────────────── -->
+    @if (notMatched.Any())
+    {
+        <div class="section-header" id="sec-unmatched">
+            <h2>Not Matched</h2>
+            <span class="section-badge red">@notMatched.Count below threshold</span>
+        </div>
+
+        <div class="cards-grid" id="grid-unmatched">
+            @for (int i = 0; i < notMatched.Count; i++)
+            {
+                var r = notMatched[i];
+                var initials = r.CandidateName != "Unknown"
+                    ? string.Concat(r.CandidateName.Split(' ').Take(2).Select(w => w[0].ToString().ToUpper()))
+                    : "?";
+                <div class="cand-card unmatched" style="animation-delay:@(i * 0.06)s">
+                    <div class="cand-avatar">@initials</div>
+                    <div class="cand-name" title="@r.CandidateName">@r.CandidateName</div>
+                    <div class="cand-file" title="@r.File">@r.File</div>
+
+                    <div class="cand-meta">
+                        @if (r.Experience != "Not mentioned")
+                        {
+                            <span class="meta-pill">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                @r.Experience
+                            </span>
+                        }
+                        <span class="meta-pill">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                            @r.File.Split('.').Last().ToUpper()
+                        </span>
+                    </div>
+
+                    <div class="score-section">
+                        <div class="score-row">
+                            <span class="score-label">BERT Score</span>
+                            <span class="score-num">@r.Score.ToString("F1")%</span>
+                        </div>
+                        <div class="score-bar-bg">
+                            <div class="score-bar-fill" style="width:0%" data-width="@r.Score.ToString("F1")%"></div>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(r.Issues))
                     {
-                        var rowClass = result.Status == "Matched" ? "table-success" : "table-danger";
-                        var barClass = result.Status == "Matched" ? "bg-success" : "bg-danger";
-
-                        <tr class="@rowClass">
-                            <td class="ps-3 align-middle">@i</td>
-                            <td class="align-middle fw-semibold">@result.File</td>
-                            <td class="align-middle">
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="progress flex-grow-1" style="height:10px;">
-                                        <div class="progress-bar @barClass"
-                                             style="width:@result.Score%">
-                                        </div>
-                                    </div>
-                                    <span class="small fw-semibold">@result.Score%</span>
-                                </div>
-                            </td>
-                            <td class="align-middle">
-                                @if (result.Status == "Matched")
-                                {
-                                    <span class="badge bg-success">&#10003; Matched</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-danger">&#10007; Not Matched</span>
-                                }
-                            </td>
-                            <td class="align-middle">
-                                @if (!string.IsNullOrEmpty(result.Issues))
-                                {
-                                    <small class="text-danger">@result.Issues</small>
-                                }
-                                else
-                                {
-                                    <small class="text-muted">—</small>
-                                }
-                            </td>
-                        </tr>
-                        i++;
+                        <div class="issues-box">
+                            <div class="issues-label">Why not matched</div>
+                            @r.Issues
+                        </div>
                     }
-                </tbody>
-            </table>
+
+                    <div class="cand-footer">
+                        <span class="status-chip unmatched-chip">
+                            <span class="status-dot"></span>
+                            Not Matched
+                        </span>
+                        <span class="threshold-info">Threshold: <strong>@Model.ThresholdUsed%</strong></span>
+                    </div>
+                </div>
+            }
         </div>
-    </div>
+    }
 
-    <div class="mt-4">
-        <a href="/ResumeMatcher/Index" class="btn btn-outline-secondary">
-            &#8592; Screen More Resumes
-        </a>
-    </div>
+    @if (!Model.Results.Any())
+    {
+        <div class="empty-state">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p>No results to display. Please go back and run a new search.</p>
+        </div>
+    }
 
-</div>
+</main>
+
+<script>
+    /* ── Animate score bars on load ──────────── */
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelectorAll('.score-bar-fill').forEach(bar => {
+                bar.style.width = bar.dataset.width;
+            });
+        }, 200);
+    });
+
+    /* ── Card filter tabs ────────────────────── */
+    function filterCards(type, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const secMatched   = document.getElementById('sec-matched');
+        const secUnmatched = document.getElementById('sec-unmatched');
+        const gridMatched   = document.getElementById('grid-matched');
+        const gridUnmatched = document.getElementById('grid-unmatched');
+
+        const showSection = (el, show) => {
+            if (!el) return;
+            el.style.display = show ? '' : 'none';
+        };
+
+        if (type === 'all') {
+            showSection(secMatched,   true);
+            showSection(gridMatched,  true);
+            showSection(secUnmatched, true);
+            showSection(gridUnmatched,true);
+        } else if (type === 'matched') {
+            showSection(secMatched,   true);
+            showSection(gridMatched,  true);
+            showSection(secUnmatched, false);
+            showSection(gridUnmatched,false);
+        } else {
+            showSection(secMatched,   false);
+            showSection(gridMatched,  false);
+            showSection(secUnmatched, true);
+            showSection(gridUnmatched,true);
+        }
+    }
+</script>
+</body>
+</html>
