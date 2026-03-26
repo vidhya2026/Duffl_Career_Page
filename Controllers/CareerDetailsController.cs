@@ -1,23 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Duffl_career.Data;
+using Duffl_career.Helpers;
 using Duffl_career.Models;
-using Duffl_career.Data;
 using Duffl_career.Service;
+using MailKit;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Duffl_career.Controllers
 {
     public class CareerDetailsController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db; 
         private readonly IWebHostEnvironment _env;
         private readonly IEmailService _emailService;
+        private readonly GeminiService _aiService;
+
 
         public CareerDetailsController(ApplicationDbContext db,
                                        IWebHostEnvironment env,
-                                       IEmailService emailService)
+                                       IEmailService emailService, GeminiService aiService)
         {
             _db = db;
             _env = env;
             _emailService = emailService;
+            _aiService = aiService;
         }
 
         // GET: /CareerDetails/Apply
@@ -127,6 +132,32 @@ namespace Duffl_career.Controllers
             // Save to database
             _db.ContactTable.Add(model);
             await _db.SaveChangesAsync();
+            
+
+            // 🔥 AI PROCESS START
+
+            // 1. Get full file path
+            var fullPath = Path.Combine(_env.WebRootPath, model.CvFilePath.TrimStart('/'));
+
+            // 2. Extract resume text
+            string resumeText = ResumeHelper.ExtractText(fullPath);
+
+            // 3. Get Job Description (for now static, later DB)
+            string jobDescription = "C#, ASP.NET, SQL, 2+ years experience";
+
+            // 4. Call AI
+            string aiResult = await _aiService.AnalyzeResume(resumeText, jobDescription);
+
+            Console.WriteLine("===== AI RAW RESPONSE =====");
+            Console.WriteLine("airesult"+aiResult);
+            Console.WriteLine("===========================");
+
+            // 5. Save AI result
+            model.AIResult = aiResult;
+
+            await _db.SaveChangesAsync();
+
+            // 🔥 AI PROCESS END
 
             // Build HTML email body
             string emailBody = $@"

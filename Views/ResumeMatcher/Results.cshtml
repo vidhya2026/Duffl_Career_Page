@@ -1,0 +1,110 @@
+﻿@model Duffl_career.Models.MatchApiResponse
+
+@{
+    ViewData["Title"] = "Screening Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+
+    <div class="mb-4">
+        <h2>Screening Results</h2>
+        <p class="text-muted">Resumes are ranked by match score, highest first.</p>
+    </div>
+
+    <div class="row mb-4 g-3">
+        <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h2 class="fw-bold">@Model.Summary.Total</h2>
+                    <p class="text-muted mb-0">Total Resumes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center border-success h-100">
+                <div class="card-body">
+                    <h2 class="fw-bold text-success">@Model.Summary.Matched</h2>
+                    <p class="text-muted mb-0">Matched</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center border-danger h-100">
+                <div class="card-body">
+                    <h2 class="fw-bold text-danger">@Model.Summary.NotMatched</h2>
+                    <p class="text-muted mb-0">Not Matched</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-3">#</th>
+                        <th>Resume File</th>
+                        <th style="width:220px">Match Score</th>
+                        <th>Status</th>
+                        <th>Issues</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var result in Model.Results)
+                    {
+                        var rowClass = result.Status == "Matched" ? "table-success" : "table-danger";
+                        var barClass = result.Status == "Matched" ? "bg-success" : "bg-danger";
+
+                        <tr class="@rowClass">
+                            <td class="ps-3 align-middle">@i</td>
+                            <td class="align-middle fw-semibold">@result.File</td>
+                            <td class="align-middle">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" style="height:10px;">
+                                        <div class="progress-bar @barClass"
+                                             style="width:@result.Score%">
+                                        </div>
+                                    </div>
+                                    <span class="small fw-semibold">@result.Score%</span>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                @if (result.Status == "Matched")
+                                {
+                                    <span class="badge bg-success">&#10003; Matched</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">&#10007; Not Matched</span>
+                                }
+                            </td>
+                            <td class="align-middle">
+                                @if (!string.IsNullOrEmpty(result.Issues))
+                                {
+                                    <small class="text-danger">@result.Issues</small>
+                                }
+                                else
+                                {
+                                    <small class="text-muted">—</small>
+                                }
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/ResumeMatcher/Index" class="btn btn-outline-secondary">
+            &#8592; Screen More Resumes
+        </a>
+    </div>
+
+</div>

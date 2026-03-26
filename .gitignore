@@ -2,4 +2,5 @@
 bin/
 obj/
 *.user
-*.suo
+*.suo	
+.ipynb_checkpoints/

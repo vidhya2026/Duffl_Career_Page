@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServe
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddSingleton<GeminiService>();
+
 
 var app = builder.Build();
 
@@ -32,7 +34,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=CareerDetails}/{action=Apply}/{id?}")
+    pattern: "{controller=ResumeMatcher}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

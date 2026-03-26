@@ -6,10 +6,7 @@ namespace Duffl_career.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Career_Detail()
-        {
-            return View();
-        }
+      
         public IActionResult Career()
         {
             return View();

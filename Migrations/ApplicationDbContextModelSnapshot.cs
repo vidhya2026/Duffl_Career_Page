@@ -30,6 +30,9 @@ namespace Duffl_career.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AIResult")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CurrentDrawnSalary")
                         .HasColumnType("nvarchar(max)");
 

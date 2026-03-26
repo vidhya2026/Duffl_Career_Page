@@ -48,6 +48,7 @@ namespace Duffl_career.Models
         public int? ExpectedSalary { get; set; }
 
         public string? CvFilePath { get; set; }
+        public string AIResult { get; set; }
 
         public DateTime SubmittedAt { get; set; } = DateTime.Now;
     }
